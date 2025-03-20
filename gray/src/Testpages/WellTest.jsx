@@ -1,6 +1,6 @@
 import React from "react";
 
-const WellbeingTest = () => {
+const WellTest = () => {
   return (
     <div>
       <h2>Well-being Test</h2>
@@ -12,4 +12,4 @@ const WellbeingTest = () => {
   );
 };
 
-export default WellbeingTest;
+export default WellTest;

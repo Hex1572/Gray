@@ -10,7 +10,7 @@ import "./Dashboard.css";
 import AnxietyTest from "./Testpages/AnxietyTest";
 import DepressionTest from "./Testpages/DepressionTest";
 import EatingTest from "./Testpages/EatingTest";
-import WellBeingTest from "./Testpages/WellBeingTest";
+import WellTest from "./Testpages/WellTest";
 
 
 const App = () => {
@@ -23,7 +23,7 @@ const App = () => {
           <Route path="/depression" element={<Depression />} />
           <Route path="/depression-test" element={<DepressionTest />} />
           <Route path="/well-being" element={<WellBeing />} />
-          <Route path="/well-being-test" element={<WellBeingTest />} />
+          <Route path="/well-being-test" element={<WellTest />} />
           <Route path="/eating-disorder" element={<EatingDisorder />} />
           <Route path="/eating-disorder-test" element={<EatingTest />} />
         </Routes>
