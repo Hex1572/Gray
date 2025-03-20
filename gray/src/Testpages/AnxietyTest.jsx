@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 import "../testDesign/AnxietyTest.css"; // Import CSS for styling
 
 const questions = [
@@ -49,6 +50,7 @@ const logisticRegression = (score) => {
 };
 
 const AnxietyTest = () => {
+  const navigate = useNavigate(); // Initialize navigate function
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState({});
   const [showResult, setShowResult] = useState(false);
@@ -127,7 +129,7 @@ const AnxietyTest = () => {
             </div>
 
             <div className="button-group">
-            <button onClick={() => window.location.assign("/anxiety")}>Go Back</button>
+              <button onClick={() => navigate(-1)}>Go Back</button> {/* Fixed Go Back */}
               <button onClick={handleNext} disabled={!answers[currentQuestion]}>
                 {currentQuestion < questions.length - 1 ? "Next" : "Finish"}
               </button>
@@ -138,7 +140,7 @@ const AnxietyTest = () => {
             <h2>Test Result</h2>
             <p><strong>Anxiety Level:</strong> {result.result}</p>
             <button onClick={() => window.location.reload()}>Retake Test</button>
-            <button onClick={() => window.location.assign("/")}>Go Back</button>
+            <button onClick={() => navigate("/")}>Go Back</button> {/* Fixed Go Back */}
           </div>
         )}
       </div>
