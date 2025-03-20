@@ -6,7 +6,7 @@ import Depression from "./pages/Depression";
 import WellBeing from "./pages/Wellbeing";
 import EatingDisorder from "./pages/EatingDisorder";
 import "./Dashboard.css";
-
+import "./pages/Anxiety.css";
 import AnxietyTest from "./Testpages/AnxietyTest";
 import DepressionTest from "./Testpages/DepressionTest";
 import EatingTest from "./Testpages/EatingTest";
