@@ -6,6 +6,8 @@ const Dashboard = ({ children }) => {
 
   const hideButtonsOnRoutes = [
     "/anxiety",
+    "/depression",
+    "/anxiety-test",
     "/depression-test",
     "/well-being-test",
     "/eating-disorder-test",
@@ -35,7 +37,7 @@ const Dashboard = ({ children }) => {
       {!shouldHideButtons && (
         <div className="test-buttons">
           <Link to="/anxiety" className="test-button">Anxiety Test</Link>
-          <Link to="/depression-test" className="test-button">Depression Test</Link>
+          <Link to="/depression" className="test-button">Depression Test</Link>
           <Link to="/well-being-test" className="test-button">Well-Being Test</Link>
           <Link to="/eating-disorder-test" className="test-button">Eating Disorder Test</Link>
         </div>

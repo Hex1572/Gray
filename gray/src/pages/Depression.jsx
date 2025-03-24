@@ -9,7 +9,6 @@ const Depression = () => {
       <h2>Depression Test</h2>
       <p>Assess your level of Depression with this quick test.</p>
       <button onClick={() => navigate("/depression-test")}>Start Test</button>
-      <button onClick={() => navigate("/")}>Go Back</button>
     </div>
   );
 };

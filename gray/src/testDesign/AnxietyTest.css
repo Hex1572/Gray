@@ -65,19 +65,18 @@ button:hover:not(:disabled) {
   border-color: rgba(255, 255, 255, 0.6);
 }
 
-/* Adjusting spacing for better alignment */
+
 .options {
-  margin-top: 20px; /* More consistent spacing */
+  margin-top: 20px; 
 }
 
 .option-label {
-  margin: 10px 0; /* Improve spacing between options */
+  margin: 10px 0;
 }
 
-/* Fix button alignment */
 .test-card button {
   display: block;
-  width: 100%; /* Full width for better usability */
+  width: 100%;
   text-align: center;
 }
 

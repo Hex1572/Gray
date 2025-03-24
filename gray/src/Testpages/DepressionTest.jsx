@@ -1,4 +1,5 @@
 import React from "react";
+import "../testDesign/AnxietyTest.css"; // Import CSS for styling
 
 const DepressionTest = () => {
   return (

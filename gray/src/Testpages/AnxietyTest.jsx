@@ -108,7 +108,7 @@ const AnxietyTest = () => {
                     checked={answers[currentQuestion] === option}
                     onChange={handleOptionChange}
                   />
-                  {option}
+                  <span>{option}</span>
                 </label>
               ))}
             </div>
