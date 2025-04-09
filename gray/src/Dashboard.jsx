@@ -60,10 +60,10 @@ const Dashboard = ({ children }) => {
             <h2>Help</h2>
             <p>Click on the test buttons to take a mental health assessment. Each test will ask you a series of questions to help evaluate your current mental state.</p>
             <ul>
-              <li><strong>Anxiety Test:</strong> Evaluate anxiety symptoms</li>
-              <li><strong>Depression Test:</strong> Check for signs of depression</li>
-              <li><strong>Well-Being Test:</strong> Gauge your general mental wellness</li>
-              <li><strong>Eating Disorder Test:</strong> Detect signs of disordered eating</li>
+              <li><strong>Anxiety Test (GAD-7):</strong> Evaluate anxiety symptoms</li>
+              <li><strong>Depression Test (PHQ-9):</strong> Check for signs of depression</li>
+              <li><strong>Well-Being Test (WHO-5):</strong> Gauge your general mental wellness</li>
+              <li><strong>Eating Disorder Test (BFI-10):</strong> Detect signs of disordered eating</li>
             </ul>
             <button onClick={() => setShowHelp(false)} className="close-button">Close</button>
           </div>

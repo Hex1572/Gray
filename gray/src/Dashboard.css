@@ -200,6 +200,7 @@ body {
   font-size: 1.1rem;
   font-weight: bold;
   border-radius: 8px;
+  margin: 10px;
   cursor: pointer;
   text-decoration: none;
   text-align: center;

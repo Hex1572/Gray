@@ -5,47 +5,58 @@ import "../testDesign/AnxietyTest.css"; // Import CSS for styling
 const questions = [
   {
     id: 1,
-    text: "How often do you feel nervous, anxious, or on edge?",
-    options: ["Never", "Rarely", "Sometimes", "Often", "Always"],
+    text: "Feeling nervous, anxious, or on edge?",
+    options: ["Not at all", "Several days", "More than half the days", "Nearly every day"],
   },
   {
     id: 2,
-    text: "How often do you have trouble relaxing?",
-    options: ["Never", "Rarely", "Sometimes", "Often", "Always"],
+    text: "Not being able to stop or control worrying?",
+    options: ["Not at all", "Several days", "More than half the days", "Nearly every day"],
   },
   {
     id: 3,
-    text: "Do you find yourself worrying excessively about different things?",
-    options: ["Never", "Rarely", "Sometimes", "Often", "Always"],
+    text: "Worrying too much about different things?",
+    options: ["Not at all", "Several days", "More than half the days", "Nearly every day"],
   },
   {
     id: 4,
-    text: "Do you experience sudden feelings of panic or fear?",
-    options: ["Never", "Rarely", "Sometimes", "Often", "Always"],
+    text: "Trouble relaxing?",
+    options: ["Not at all", "Several days", "More than half the days", "Nearly every day"],
   },
   {
     id: 5,
-    text: "How often do you have trouble sleeping due to anxiety?",
-    options: ["Never", "Rarely", "Sometimes", "Often", "Always"],
+    text: "Being so restless that it is hard to sit still?",
+    options: ["Not at all", "Several days", "More than half the days", "Nearly every day"],
+  },
+  {
+    id: 6,
+    text: "Becoming easily annoyed or irritable?",
+    options: ["Not at all", "Several days", "More than half the days", "Nearly every day"],
+  },
+  {
+    id: 7,
+    text: "Feeling afraid as if something awful might happen?",
+    options: ["Not at all", "Several days", "More than half the days", "Nearly every day"],
   },
 ];
 
 // Assign numerical values to options for logistic regression
 const optionValues = {
-  Never: 0,
-  Rarely: 1,
-  Sometimes: 2,
-  Often: 3,
-  Always: 4,
+  "Not at all": 0,
+  "Several days": 1,
+  "More than half the days": 2,
+  "Nearly every day": 3,
 };
 
 const logisticRegression = (score) => {
-  if (score >= 14) {
-    return { result: "High Anxiety – Consider professional help." };
-  } else if (score >= 7) {
+  if (score >= 15) {
+    return { result: "Severe Anxiety – Consider professional help." };
+  } else if (score >= 10) {
     return { result: "Moderate Anxiety – Keep monitoring." };
+  } else if (score >= 5) {
+    return { result: "Mild Anxiety – Be mindful of your well-being." };
   } else {
-    return { result: "Low Anxiety – Keep taking care of yourself!" };
+    return { result: "Minimal Anxiety – Keep taking care of yourself!" };
   }
 };
 
@@ -96,7 +107,7 @@ const AnxietyTest = () => {
       <div className="test-card">
         {!showResult ? (
           <>
-            <h2>Anxiety Test</h2>
+            <h2>Anxiety Test (GAD-7)</h2>
             <p>{questions[currentQuestion].text}</p>
             <div className="options">
               {questions[currentQuestion].options.map((option, index) => (
@@ -129,7 +140,6 @@ const AnxietyTest = () => {
             </div>
 
             <div className="button-group">
-              <button onClick={() => navigate(-1)}>Go Back</button> {/* Fixed Go Back */}
               <button onClick={handleNext} disabled={!answers[currentQuestion]}>
                 {currentQuestion < questions.length - 1 ? "Next" : "Finish"}
               </button>
@@ -140,7 +150,7 @@ const AnxietyTest = () => {
             <h2>Test Result</h2>
             <p><strong>Anxiety Level:</strong> {result.result}</p>
             <button onClick={() => window.location.reload()}>Retake Test</button>
-            <button onClick={() => navigate("/")}>Go Back</button> {/* Fixed Go Back */}
+            <button onClick={() => navigate("/")}>Go Back</button>
           </div>
         )}
       </div>
