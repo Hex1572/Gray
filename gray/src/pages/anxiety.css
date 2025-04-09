@@ -11,3 +11,22 @@
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+.content-wrapper {
+  max-width: 700px;
+  width: 100%;
+  line-height: 1.6;
+}
+
+ul {
+  padding-left: 20px;
+}
+
+button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+
+
