@@ -14,7 +14,7 @@
     margin-right: 40px;
     text-align: left;
     position: absolute;
-    top: 50%;
+    top: 56%;
     left: 6%;
     transform: translateY(-50%);
     font-size: 16px;
@@ -42,7 +42,7 @@
     width: 300px;
     text-align: left;
     position: absolute;
-    top: 50%;
+    top: 52%;
     right: 6%;
     transform: translateY(-50%);
     font-size: 16px;
@@ -66,12 +66,12 @@
     padding: 30px; /* Increased padding */
     border-radius: 12px; /* Slightly rounded edges */
     box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15); /* More depth */
-    width: 500px; /* Increased width */
+    width: 600px; /* Increased width */
     text-align: center;
   
     /* Center the card */
     position: absolute;
-    top: 50%;
+    top: 55%;
     left: 50%;
     transform: translate(-50%, -50%);
   }
