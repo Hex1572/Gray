@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom"; // Import useNavigate
-import "../testDesign/AnxietyTest.styles.css"; // Import CSS for styling
+import "../testDesign/AnxietyTest.css"; // Import CSS for styling
 
 const questions = [
   {

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom"; // Import useNavigate
-import "../testDesign/EatingTest.styles.css"; // Import CSS for styling
+import "../testDesign/EatingTest.css"; // Import CSS for styling
 
 // BFI-10 Questions (Big Five Inventory - 10 items)
 const questions = [
