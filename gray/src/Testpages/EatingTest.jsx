@@ -7,62 +7,62 @@ const questions = [
   {
     id: 1,
     text: "I see myself as someone who is talkative.",
-    options: ["Disagree strongly", "Disagree a little", "Neither agree nor disagree", "Agree a little", "Agree strongly"],
+    options: ["Strongly Disagree", "Disagree a little", "Neutral", "Agree", "Strongly Agree"],
   },
   {
     id: 2,
     text: "I see myself as someone who is reserved.",
-    options: ["Disagree strongly", "Disagree a little", "Neither agree nor disagree", "Agree a little", "Agree strongly"],
+    options: ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"],
   },
   {
     id: 3,
     text: "I see myself as someone who is outgoing, sociable.",
-    options: ["Disagree strongly", "Disagree a little", "Neither agree nor disagree", "Agree a little", "Agree strongly"],
+    options: ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"],
   },
   {
     id: 4,
     text: "I see myself as someone who tends to find fault with others.",
-    options: ["Disagree strongly", "Disagree a little", "Neither agree nor disagree", "Agree a little", "Agree strongly"],
+    options: ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"],
   },
   {
     id: 5,
     text: "I see myself as someone who is helpful and unselfish with others.",
-    options: ["Disagree strongly", "Disagree a little", "Neither agree nor disagree", "Agree a little", "Agree strongly"],
+    options: ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"],
   },
   {
     id: 6,
     text: "I see myself as someone who is relaxed, handles stress well.",
-    options: ["Disagree strongly", "Disagree a little", "Neither agree nor disagree", "Agree a little", "Agree strongly"],
+    options: ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"],
   },
   {
     id: 7,
     text: "I see myself as someone who gets nervous easily.",
-    options: ["Disagree strongly", "Disagree a little", "Neither agree nor disagree", "Agree a little", "Agree strongly"],
+    options: ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"],
   },
   {
     id: 8,
     text: "I see myself as someone who has frequent mood swings.",
-    options: ["Disagree strongly", "Disagree a little", "Neither agree nor disagree", "Agree a little", "Agree strongly"],
+    options: ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"],
   },
   {
     id: 9,
     text: "I see myself as someone who is curious about many different things.",
-    options: ["Disagree strongly", "Disagree a little", "Neither agree nor disagree", "Agree a little", "Agree strongly"],
+    options: ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"],
   },
   {
     id: 10,
     text: "I see myself as someone who is full of energy.",
-    options: ["Disagree strongly", "Disagree a little", "Neither agree nor disagree", "Agree a little", "Agree strongly"],
+    options: ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"],
   },
 ];
 
 // Assign numerical values to options for scoring
 const optionValues = {
-  "Disagree strongly": 1,
-  "Disagree a little": 2,
-  "Neither agree nor disagree": 3,
-  "Agree a little": 4,
-  "Agree strongly": 5,
+  "Strongly Disagree": 1,
+  "Disagree": 2,
+  "Neutral": 3,
+  "Agree": 4,
+  "Strongly Agree": 5,
 };
 
 // Interpret the results based on scoring
@@ -124,11 +124,11 @@ const EatingTest = () => {
     <div className="test-container">
       <div className="test-legend-card">
         <h2>Legend</h2>
-        <p><li><strong>Disagree strongly:</strong> 1 point</li></p>
-        <p><li><strong>Disagree a little:</strong> 2 points</li></p>
-        <p><li><strong>Neither agree nor disagree:</strong> 3 points</li></p>
-        <p><li><strong>Agree a little:</strong> 4 points</li></p>
-        <p><li><strong>Agree strongly:</strong> 5 points</li></p>
+        <p><li><strong>Strongly Disagree:</strong> 1 point</li></p>
+        <p><li><strong>Disagree:</strong> 2 points</li></p>
+        <p><li><strong>Neutral:</strong> 3 points</li></p>
+        <p><li><strong>Agree:</strong> 4 points</li></p>
+        <p><li><strong>Strongly Agree:</strong> 5 points</li></p>
 
         <h3><strong>Total Score </strong> = 10-50 points</h3>
 
