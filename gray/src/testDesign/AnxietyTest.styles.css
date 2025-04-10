@@ -5,6 +5,61 @@
   height: 100vh;
 }
 
+.test-legend-card {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  width: 300px;
+  margin-right: 40px;
+  text-align: left;
+  position: absolute;
+  top: 50%;
+  left: 6%;
+  transform: translateY(-50%);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--text-dark);
+}
+
+.test-legend-card h2 {
+  text-align:center;
+}
+.test-legend-card p {
+  margin: 6px 0;
+}
+
+.test-legend-card li {
+  list-style: disc;
+  margin-left: 20px;
+}
+
+.test-instruction-card {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  width: 300px;
+  text-align: left;
+  position: absolute;
+  top: 50%;
+  right: 6%;
+  transform: translateY(-50%);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--text-dark);
+}
+
+.test-instruction-card h2 {
+  text-align: center;
+  color: #2e7d32;
+  margin-bottom: 10px;
+}
+
+.test-instruction-card p {
+  margin: 10px 0;
+}
+
 
 .test-card {
   background: rgb(255, 255, 255);
@@ -35,10 +90,43 @@
   margin: 8px 0;
 }
 
+/* Style for selected option */
+/* Style for the radio input itself */
 input[type="radio"] {
-  margin-right: 12px;
-  transform: scale(1.2); /* Make radio buttons bigger */
+  appearance: none; /* Remove default radio button appearance */
+  width: 15px; /* Set a size for the radio button */
+  height: 15px; /* Set a size for the radio button */
+  border-radius: 50%; /* Make it round */
+  border: 2px solid #ccc; /* Light gray border */
+  background-color: #fff; /* White background */
+  margin-right: 10px; /* Space between radio and text */
+  cursor: pointer; /* Pointer cursor for better UX */
+  transition: background-color 0.3s ease, border-color 0.3s ease; /* Smooth transition */
 }
+
+/* Style for when the radio button is selected */
+input[type="radio"]:checked {
+  background-color: #007bff; /* Blue background when selected */
+  
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.5); /* Blue glow effect */
+}
+
+
+/* When radio is selected, highlight the label */
+input[type="radio"]:checked + .option-label {
+  background-color: rgba(0, 123, 255, 0.1); /* Light blue background for the label */
+}
+
+/* Additional spacing for better UI */
+.options {
+  margin-top: 20px;
+}
+
+.option-label {
+  margin: 10px 0;
+}
+
+
 
 button {
   margin-top: 25px; /* More spacing */

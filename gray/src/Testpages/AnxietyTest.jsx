@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom"; // Import useNavigate
-import "../testDesign/AnxietyTest.css"; // Import CSS for styling
+import "../testDesign/AnxietyTest.styles.css"; // Import CSS for styling
 
 const questions = [
   {
@@ -103,7 +103,41 @@ const AnxietyTest = () => {
   };
 
   return (
+  
     <div className="test-container">
+
+
+      <div className="test-legend-card"> 
+        <h2>Legend</h2>
+        <p><li><strong>Not at all:</strong> 0 points</li></p> 
+        <p><li><strong>Several days:</strong> 1 point</li></p>
+        <p><li><strong>More than half the days:</strong> 2 points</li></p>
+        <p><li><strong>Nearly every day:</strong> 3 points</li></p>
+        
+        <h3><strong>Total Score </strong> = 0-21 points</h3>
+        <h2>Interpretation</h2>
+        <p><li><strong>0-4:</strong> Minimal Anxiety</li></p>
+        <p><li><strong>5-9:</strong> Mild Anxiety</li></p>
+        <p><li><strong>10-14:</strong> Moderate Anxiety</li></p>
+        <p><li><strong>15-21:</strong> Severe Anxiety</li></p>
+        <p><strong>Note:</strong> This test is not a substitute for professional diagnosis or treatment.</p>
+      </div>
+
+
+
+
+      <div className="test-instruction-card">
+        <h2>Instruction</h2>
+        <p>This test is designed to evaluate your <strong>anxiety levels</strong>. Please answer each question honestly based on how you have felt in the <strong>last two weeks</strong>.</p>
+        <p>Click <strong>"Next"</strong> to proceed through the questions. At the end of the test, you will receive a score and feedback on your anxiety level.</p>
+
+        <p>Remember, this test is not a substitute for professional help. If you are experiencing significant anxiety, please consider reaching out to a mental health professional.</p>
+      </div>
+
+
+
+
+
       <div className="test-card">
         {!showResult ? (
           <>
