@@ -8,7 +8,6 @@ const EatingDisorder = () => {
       <h2>Eating Disorder Test</h2>
       <p>Assess your level of Eating Disorder with this quick test.</p>
       <button onClick={() => navigate("/eating-disorder-test")}>Start Test</button>
-      <button onClick={() => navigate("/")}>Go Back</button>
     </div>
   );
 };

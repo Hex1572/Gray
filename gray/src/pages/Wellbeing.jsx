@@ -9,7 +9,6 @@ const Wellbeing = () => {
       <h2>Well-Being Test</h2>
       <p>Assess your level of Well-Being with this quick test.</p>
       <button onClick={() => navigate("/well-being-test")}>Start Test</button>
-      <button onClick={() => navigate("/")}>Go Back</button>
     </div>
   );
 };
