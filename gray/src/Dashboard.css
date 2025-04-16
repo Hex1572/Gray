@@ -53,40 +53,37 @@ html, body {
   color: var(--text-dark) !important;
 }
 
+/* Default styles stay as is */
 
+/* Tablets (max-width: 768px) */
+@media screen and (max-width: 768px) {
+  .main-content {
+    padding: 6rem 1.5rem 2rem;
+    max-width: 90%;
+  }
 
-
-/* === Responsive Tweaks === */
-@media (max-width: 768px) {
   .home-button {
     font-size: 1.5rem;
     margin-left: 1rem;
   }
+}
 
-  .login-button {
-    font-size: 0.9rem;
-    padding: 0.4rem 0.8rem;
-    margin-right: 1rem;
+/* Mobile devices (max-width: 480px) */
+@media screen and (max-width: 480px) {
+  html, body {
+    font-size: 15px;
   }
 
   .main-content {
-    padding: 6rem 1rem 2rem;
+    padding: 5rem 1rem 1.5rem;
   }
 
-  
-}
-
-@media (max-width: 480px) {
-  .home-button,
-  .login-button {
-    font-size: 1rem;
-    transform: none;
-    margin: 0.5rem;
-  }
-
-  
-
-  .main-content {
-    padding: 5rem 1rem 1rem;
+  .home-button {
+    font-size: 1.3rem;
+    margin-left: 0.5rem;
   }
 }
+
+
+
+

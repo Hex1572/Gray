@@ -51,7 +51,7 @@
     flex: 1 1 40%;
     padding: 2rem;
     color: var(--text-dark);
-    margin-bottom: 15rem;
+    margin-bottom: 100px;
     border-radius: 60px 60px 6px 60px;
     background-color: rgba(127, 236, 255, 0.226);
     min-width: 300px; /* helps with responsiveness */
@@ -65,7 +65,7 @@
    
     background-color: rgba(95, 141, 241, 0.664);
     min-width: 300px; /* helps with responsiveness */
-    margin-top: 15rem; /* << This creates the slight vertical offset */
+    margin-top: 100px; /* << This creates the slight vertical offset */
     
     
   }

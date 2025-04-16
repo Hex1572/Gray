@@ -65,7 +65,7 @@ const DepressionTest = () => {
     <div className="test-container">
       {!showResult ? (
         <div className="question-section">
-          <h1>Depression Test (PHQ9)</h1>
+          <h1>Depression Test (PHQ-9)</h1>
           {questions.map((question, index) => (
             <div key={question.id} className="question-item">
               <p>{index + 1}. {question.text}</p>
