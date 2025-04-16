@@ -1,62 +1,21 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom"; // Import useNavigate
-import "../testDesign/EatingTest.css"; // Import CSS for styling
+import { useNavigate } from "react-router-dom";
+import "../testDesign/EatingTest.css";
 
-// BFI-10 Questions (Big Five Inventory - 10 items)
+// BFI-10 Questions
 const questions = [
-  {
-    id: 1,
-    text: "I see myself as someone who is talkative.",
-    options: ["Strongly Disagree", "Disagree a little", "Neutral", "Agree", "Strongly Agree"],
-  },
-  {
-    id: 2,
-    text: "I see myself as someone who is reserved.",
-    options: ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"],
-  },
-  {
-    id: 3,
-    text: "I see myself as someone who is outgoing, sociable.",
-    options: ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"],
-  },
-  {
-    id: 4,
-    text: "I see myself as someone who tends to find fault with others.",
-    options: ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"],
-  },
-  {
-    id: 5,
-    text: "I see myself as someone who is helpful and unselfish with others.",
-    options: ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"],
-  },
-  {
-    id: 6,
-    text: "I see myself as someone who is relaxed, handles stress well.",
-    options: ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"],
-  },
-  {
-    id: 7,
-    text: "I see myself as someone who gets nervous easily.",
-    options: ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"],
-  },
-  {
-    id: 8,
-    text: "I see myself as someone who has frequent mood swings.",
-    options: ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"],
-  },
-  {
-    id: 9,
-    text: "I see myself as someone who is curious about many different things.",
-    options: ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"],
-  },
-  {
-    id: 10,
-    text: "I see myself as someone who is full of energy.",
-    options: ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"],
-  },
+  { id: 1,text: "I see myself as someone who is talkative.", options: ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"] },
+  { id: 2, text: "I see myself as someone who is reserved.", options: ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"] },
+  { id: 3, text: "I see myself as someone who is outgoing, sociable.", options: ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"] },
+  { id: 4, text: "I see myself as someone who tends to find fault with others.", options: ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"] },
+  { id: 5, text: "I see myself as someone who is helpful and unselfish with others.", options: ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"] },
+  { id: 6, text: "I see myself as someone who is relaxed, handles stress well.", options: ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"] },
+  { id: 7, text: "I see myself as someone who gets nervous easily.", options: ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"] },
+  { id: 8, text: "I see myself as someone who has frequent mood swings.", options: ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"] },
+  { id: 9, text: "I see myself as someone who is curious about many different things.", options: ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"] },
+  { id: 10, text: "I see myself as someone who is full of energy.", options: ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"] },
 ];
 
-// Assign numerical values to options for scoring
 const optionValues = {
   "Strongly Disagree": 1,
   "Disagree": 2,
@@ -65,141 +24,75 @@ const optionValues = {
   "Strongly Agree": 5,
 };
 
-// Interpret the results based on scoring
 const calculatePersonality = (scores) => {
-  const traits = {
-    extraversion: scores[0] + scores[2] + scores[3] + scores[5],
-    agreeableness: scores[1] + scores[4],
-    neuroticism: scores[6] + scores[7],
-    openness: scores[8],
-    conscientiousness: scores[9],
+  return {
+    Extraversion: scores[0] + scores[2] + scores[9],
+    Agreeableness: scores[4] + (6 - scores[3]), // Reverse-coded
+    Neuroticism: scores[6] + scores[7],
+    Openness: scores[8],
+    Conscientiousness: scores[5] + (6 - scores[1]), // Reverse-coded
   };
-
-  return traits;
 };
 
 const EatingTest = () => {
-  const navigate = useNavigate(); // Initialize navigate function
-  const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState({});
   const [showResult, setShowResult] = useState(false);
   const [result, setResult] = useState(null);
 
-  const handleOptionChange = (event) => {
-    setAnswers({
-      ...answers,
-      [currentQuestion]: event.target.value,
-    });
+  const handleOptionSelect = (questionIndex, selectedOption) => {
+    setAnswers((prev) => ({
+      ...prev,
+      [questionIndex]: selectedOption,
+    }));
   };
 
-  const handleNext = () => {
-    if (currentQuestion < questions.length - 1) {
-      setCurrentQuestion(currentQuestion + 1);
-    } else {
-      // Calculate the scores for each personality trait
-      const totalScores = Object.values(answers)
-        .map((ans) => optionValues[ans])
-        .reduce((sum, value) => sum + value, 0);
-
-      // Apply personality traits interpretation
-      const personalityTraits = calculatePersonality(Object.values(answers).map(ans => optionValues[ans]));
-
-      // Set the result state
-      setResult(personalityTraits);
-      setShowResult(true);
+  const handleSubmit = () => {
+    if (Object.keys(answers).length < questions.length) {
+      alert("Please answer all questions before submitting.");
+      return;
     }
-  };
 
-  const handleBack = () => {
-    if (currentQuestion > 0) {
-      setCurrentQuestion(currentQuestion - 1);
-    }
-  };
+    const scoreArray = Object.values(answers).map((ans) => optionValues[ans]);
+    const personalityTraits = calculatePersonality(scoreArray);
 
-  const handleQuestionClick = (index) => {
-    setCurrentQuestion(index);
+    setResult(personalityTraits);
+    setShowResult(true);
   };
 
   return (
     <div className="test-container">
-      <div className="test-legend-card">
-        <h2>Legend</h2>
-        <p><li><strong>Strongly Disagree:</strong> 1 point</li></p>
-        <p><li><strong>Disagree:</strong> 2 points</li></p>
-        <p><li><strong>Neutral:</strong> 3 points</li></p>
-        <p><li><strong>Agree:</strong> 4 points</li></p>
-        <p><li><strong>Strongly Agree:</strong> 5 points</li></p>
-
-        <h3><strong>Total Score </strong> = 10-50 points</h3>
-
-        <h2>Interpretation</h2>
-        <p><strong>Extraversion:</strong> Scores reflect sociability and energy.</p>
-        <p><strong>Agreeableness:</strong> Scores reflect compassion and cooperation.</p>
-        <p><strong>Neuroticism:</strong> Scores reflect emotional stability and vulnerability.</p>
-        <p><strong>Openness:</strong> Scores reflect intellectual curiosity and creativity.</p>
-        <p><strong>Conscientiousness:</strong> Scores reflect self-discipline and organization.</p>
-        <p><strong>Note:</strong> This test is for general personality insights, not a definitive measure.</p>
-      </div>
-
-      <div className="test-instruction-card">
-        <h2>Instructions</h2>
-        <p>This test assesses your personality traits based on the Big Five Inventory (BFI-10). Please respond honestly to each statement.</p>
-        <p>Click <strong>"Next"</strong> to move through the questions. After completing the test, you'll receive insights into your personality traits.</p>
-      </div>
-
-      <div className="test-card">
-        {!showResult ? (
-          <>
-            <h2>EatingTest (Big Five Inventory - 10)</h2>
-            <p>{questions[currentQuestion].text}</p>
-
-            <div className="options">
-              {questions[currentQuestion].options.map((option, index) => (
-                <label key={index} className="option-label">
-                  <input
-                    type="radio"
-                    name={`question-${currentQuestion}`}
-                    value={option}
-                    checked={answers[currentQuestion] === option}
-                    onChange={handleOptionChange}
-                  />
-                  <span>{option}</span>
-                </label>
-              ))}
+      {!showResult ? (
+        <div className="question-section">
+          <h1>Personality Test (BFI-10)</h1>
+          {questions.map((question, index) => (
+            <div key={question.id} className="question-item">
+              <p>{index + 1}. {question.text}</p>
+              <div className="button-options">
+                {question.options.map((option) => (
+                  <button
+                    key={option}
+                    onClick={() => handleOptionSelect(index, option)}
+                    className={`option-button ${answers[index] === option ? "selected" : ""}`}
+                  >
+                    {option}
+                  </button>
+                ))}
+              </div>
             </div>
+          ))}
 
-            {/* Question Navigation Shortcuts */}
-            <div className="question-shortcuts">
-              {questions.map((q, index) => (
-                <button
-                  key={q.id}
-                  className={`question-btn ${answers[index] ? "answered" : ""} ${index === currentQuestion ? "active" : ""}`}
-                  onClick={() => handleQuestionClick(index)}
-                >
-                  {q.id}
-                </button>
-              ))}
-            </div>
-
-            <div className="button-group">
-              <button onClick={handleNext} disabled={!answers[currentQuestion]}>
-                {currentQuestion < questions.length - 1 ? "Next" : "Finish"}
-              </button>
-            </div>
-          </>
-        ) : (
-          <div className="result-section">
-            <h2>Test Result</h2>
-            <p><strong>Extraversion:</strong> {result.extraversion}</p>
-            <p><strong>Agreeableness:</strong> {result.agreeableness}</p>
-            <p><strong>Neuroticism:</strong> {result.neuroticism}</p>
-            <p><strong>Openness:</strong> {result.openness}</p>
-            <p><strong>Conscientiousness:</strong> {result.conscientiousness}</p>
-            <button onClick={() => window.location.reload()}>Retake Test</button>
-            <button onClick={() => navigate("/")}>Go Back</button>
-          </div>
-        )}
-      </div>
+          <button onClick={handleSubmit} className="submit-button">SUBMIT</button>
+        </div>
+      ) : (
+        <div className="result-section">
+          <h2>Your Personality Trait Scores:</h2>
+          <ul>
+            {Object.entries(result).map(([trait, value]) => (
+              <li key={trait}><strong>{trait}:</strong> {value}</li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   );
 };

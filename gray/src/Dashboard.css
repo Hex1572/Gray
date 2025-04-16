@@ -1,260 +1,92 @@
 :root {
   --cream: #f5e6cc;
-  --white: rgba(255, 255, 255, 0.5); /* Semi-transparent for blur effect */
+  --white: rgba(255, 255, 255, 0.5);
   --text-dark: #5a5a5a;
   --button-bg: #e0c8a9;
   --button-hover: #d1b495;
 }
 
-body {
-  font-family: Arial, sans-serif;
-  background: url("./images/MentalHealthBG.png") no-repeat center center/cover;
-  /* background: var(--cream); */
+html, body {
+  background: white;
+  font-family: "Montserrat", Arial, Helvetica, sans-serif;
   margin: 0;
   padding: 0;
-  color: var(--text-dark);
-  overflow: hidden;
-}
-
-.header {
+  font-size: 16px;
+  line-height: 1.5;
+  overflow-x: hidden;
   width: 100%;
-  background: var(--white);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  padding: 30px 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center; /* Center everything horizontally */
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 1000;
+  box-sizing: border-box;
 }
 
-/* Wrapper for title and description */
-.header-content {
-  text-align: center;
+/* === Dashboard Layout === */
+.dashboard {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%); /* Perfectly centers it */
+  min-height: 100vh;
 }
 
-/* Style H1 */
-.header-content h1 {
-  margin: 0;
-  font-size: 1.8rem;
-  color: var(--text-dark);
+/* === Main Content Area === */
+.main-content {
+  flex: 1;
+  padding: 8rem 2rem 2rem;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  text-align: center;
 }
 
-/* Style P */
-.header-content p {
-  margin: 5px 0 0; /* Small gap between h1 and p */
-  font-size: 1rem;
-  color: var(--text-dark);
-}
-
-.header-right {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  margin-top: 30px;
-  margin-bottom: -20px;
-  transform: translateY(-26%);
-}
-
-/* Style for Help Link */
-.help-link {
-  color: rgb(44, 102, 228);
-  text-decoration: underline;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: all 0.3s ease-in-out;
-  
-}
-
-.help-link:hover {
-  color: black;
-  text-decoration: underline;
-}
-
-
+/* === Home Button === */
 .home-button {
   color: var(--text-dark);
-  padding: 1px 1px;
-  font-size: 50px;
+  padding: 0.25rem 0.5rem;
+  font-size: 2rem;
   font-weight: bold;
   border-radius: 8px;
   cursor: pointer;
   text-decoration: none;
   transition: all 0.3s ease-in-out;
-  margin-left: 40px; /* Keeps button on the right */
+  margin-left: 2rem;
   margin-right: auto;
-  right: 20px;
-  top: 50%;
 }
 
 .home-button:hover {
-  color: var(--text-dark) !important; /* Keeps text black on hover */
+  color: var(--text-dark) !important;
 }
 
 
 
 
-/* Login Button */
-.login-button {
-  background: rgba(255, 255, 255, 0.3); /* Semi-transparent background */
-  backdrop-filter: blur(8px); /* Subtle blur effect */
-  border: 2px solid rgba(255, 255, 255, 0.5); /* Soft border */
-  color: var(--text-dark);
-  padding: 10px 15px;
-  font-size: 1rem;
-  font-weight: bold;
-  border-radius: 8px;
-  cursor: pointer;
-  text-decoration: none;
-  transition: all 0.3s ease-in-out;
-  margin-left: auto; /* Keeps button on the right */
-  margin-right: 40px;
-  right: 20px;
-  top: 50%;
-  transform: translateY(-26%);
+/* === Responsive Tweaks === */
+@media (max-width: 768px) {
+  .home-button {
+    font-size: 1.5rem;
+    margin-left: 1rem;
+  }
+
+  .login-button {
+    font-size: 0.9rem;
+    padding: 0.4rem 0.8rem;
+    margin-right: 1rem;
+  }
+
+  .main-content {
+    padding: 6rem 1rem 2rem;
+  }
+
+  
 }
 
-/* Hover & Active Effects */
-.login-button:hover {
-  background: rgba(255, 255, 255, 0.5);
-  border-color: rgba(255, 255, 255, 0.7);
-  color: black !important; /* Keeps text black on hover */
-}
+@media (max-width: 480px) {
+  .home-button,
+  .login-button {
+    font-size: 1rem;
+    transform: none;
+    margin: 0.5rem;
+  }
 
-.login-button:active {
-  background: rgba(255, 255, 255, 0.6);
-  color: black !important; /* Keeps text black on click */
-}
+  
 
-
-.close-button {
-  background: rgba(255, 255, 255, 0.3); /* Semi-transparent background */
-  backdrop-filter: blur(8px); /* Subtle blur effect */
-  border: 2px solid rgba(255, 255, 255, 0.5); /* Soft border */
-  color: var(--text-dark);
-  padding: 10px 15px;
-  font-size: 1rem;
-  font-weight: bold;
-  border-radius: 8px;
-  cursor: pointer;
-  text-decoration: none;
-  transition: all 0.3s ease-in-out;
-  margin-left: auto; /* Keeps button on the right */
-  margin-right: 40px;
-  right: 20px;
-  top: 50%;
-  transform: translateY(-26%);
-}
-
-/* Hover & Active Effects */
-.close-button:hover {
-  background: rgba(255, 255, 255, 0.5);
-  border-color: rgba(255, 255, 255, 0.7);
-  color: rgb(209, 19, 19) !important; /* Keeps text black on hover */
-}
-
-.close-button:active {
-  background: rgba(255, 255, 255, 0.6);
-  color: rgb(209, 19, 19) !important; /* Keeps text black on click */
-}
-
-/* Main Content */
-.main-content {
-  width: 100%;
-  max-width: 800px;
-  padding: 80px 30px 30px; /* Added padding to prevent overlap with fixed header */
-  margin: auto;
-  text-align: center;
-}
-
-/* Test Buttons */
-.test-buttons {
-  text-align: center;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
-  margin-top: 40px;
-}
-
-.test-button {
-  background: rgba(255, 255, 255, 0.3); /* Semi-transparent background */
-  backdrop-filter: blur(8px); /* Subtle blur effect */
-  border: 2px solid rgba(255, 255, 255, 0.5); /* Soft border */
-  color: var(--text-dark);
-  padding: 15px 20px;
-  font-size: 1.1rem;
-  font-weight: bold;
-  border-radius: 8px;
-  margin: 10px;
-  cursor: pointer;
-  text-decoration: none;
-  text-align: center;
-  transition: all 0.3s ease-in-out;
-  width: 220px; /* Consistent button size */
-}
-
-.test-button:hover {
-  background: rgba(255, 255, 255, 0.5);
-  border-color: rgba(255, 255, 255, 0.7);
-  color: black !important; /* Keeps text black on hover */
-}
-
-.test-button:active {
-  background: rgba(255, 255, 255, 0.6);
-  color: black !important; /* Keeps text black on click */
-}
-
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.4);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 2000;
-}
-
-.modal {
-  background: white;
-  padding: 30px;
-  border-radius: 12px;
-  max-width: 500px;
-  width: 90%;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  text-align: left;
-}
-
-.modal h2 {
-  margin-top: 0;
-  color: var(--text-dark);
-}
-
-.modal p {
-  margin: 10px 0;
-}
-
-.modal ul {
-  padding-left: 20px;
-}
-
-.modal ul li {
-  margin-bottom: 10px;
+  .main-content {
+    padding: 5rem 1rem 1rem;
+  }
 }

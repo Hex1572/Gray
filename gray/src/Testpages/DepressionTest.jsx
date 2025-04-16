@@ -1,56 +1,19 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom"; // Import useNavigate
-import "../testDesign/AnxietyTest.css"; // Import CSS for styling
+import { useNavigate } from "react-router-dom";
+import "../testDesign/EatingTest.css";
 
 const questions = [
-  {
-    id: 1,
-    text: "Little interest or pleasure in doing things?",
-    options: ["Not at all", "Several days", "More than half the days", "Nearly every day"],
-  },
-  {
-    id: 2,
-    text: "Feeling down, depressed, or hopeless?",
-    options: ["Not at all", "Several days", "More than half the days", "Nearly every day"],
-  },
-  {
-    id: 3,
-    text: "Trouble falling or staying asleep, or sleeping too much?",
-    options: ["Not at all", "Several days", "More than half the days", "Nearly every day"],
-  },
-  {
-    id: 4,
-    text: "Feeling tired or having little energy?",
-    options: ["Not at all", "Several days", "More than half the days", "Nearly every day"],
-  },
-  {
-    id: 5,
-    text: "Poor appetite or overeating?",
-    options: ["Not at all", "Several days", "More than half the days", "Nearly every day"],
-  },
-  {
-    id: 6,
-    text: "Feeling bad about yourself—or that you are a failure or have let yourself or your family down?",
-    options: ["Not at all", "Several days", "More than half the days", "Nearly every day"],
-  },
-  {
-    id: 7,
-    text: "Trouble concentrating on things, such as reading the newspaper or watching television?",
-    options: ["Not at all", "Several days", "More than half the days", "Nearly every day"],
-  },
-  {
-    id: 8,
-    text: "Moving or speaking so slowly that other people could have noticed? Or the opposite—being so fidgety or restless that you have been moving around a lot more than usual?",
-    options: ["Not at all", "Several days", "More than half the days", "Nearly every day"],
-  },
-  {
-    id: 9,
-    text: "Thoughts that you would be better off dead, or of hurting yourself in some way?",
-    options: ["Not at all", "Several days", "More than half the days", "Nearly every day"],
-  },
+  { id: 1, text: "Little interest or pleasure in doing things?", options: ["Not at all", "Several days", "More than half the days", "Nearly every day"] },
+  { id: 2, text: "Feeling down, depressed, or hopeless?", options: ["Not at all", "Several days", "More than half the days", "Nearly every day"] },
+  { id: 3, text: "Trouble falling or staying asleep, or sleeping too much?", options: ["Not at all", "Several days", "More than half the days", "Nearly every day"] },
+  { id: 4, text: "Feeling tired or having little energy?", options: ["Not at all", "Several days", "More than half the days", "Nearly every day"] },
+  { id: 5, text: "Poor appetite or overeating?", options: ["Not at all", "Several days", "More than half the days", "Nearly every day"] },
+  { id: 6, text: "Feeling bad about yourself—or that you are a failure or have let yourself or your family down?", options: ["Not at all", "Several days", "More than half the days", "Nearly every day"] },
+  { id: 7, text: "Trouble concentrating on things, such as reading the newspaper or watching television?", options: ["Not at all", "Several days", "More than half the days", "Nearly every day"] },
+  { id: 8, text: "Moving or speaking so slowly that other people could have noticed? Or the opposite—being so fidgety or restless that you have been moving around a lot more than usual?", options: ["Not at all", "Several days", "More than half the days", "Nearly every day"] },
+  { id: 9, text: "Thoughts that you would be better off dead, or of hurting yourself in some way?", options: ["Not at all", "Several days", "More than half the days", "Nearly every day"] },
 ];
 
-// Assign numerical values to options for logistic regression
 const optionValues = {
   "Not at all": 0,
   "Several days": 1,
@@ -71,121 +34,67 @@ const logisticRegression = (score) => {
 };
 
 const DepressionTest = () => {
-  const navigate = useNavigate(); // Initialize navigate function
-  const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState({});
   const [showResult, setShowResult] = useState(false);
   const [result, setResult] = useState(null);
 
-  const handleOptionChange = (event) => {
-    setAnswers({
-      ...answers,
-      [currentQuestion]: event.target.value,
-    });
+  const handleOptionSelect = (questionIndex, selectedOption) => {
+    setAnswers((prevAnswers) => ({
+      ...prevAnswers,
+      [questionIndex]: selectedOption,
+    }));
   };
 
-  const handleNext = () => {
-    if (currentQuestion < questions.length - 1) {
-      setCurrentQuestion(currentQuestion + 1);
-    } else {
-      // Calculate the depression score
-      const totalScore = Object.values(answers)
-        .map((ans) => optionValues[ans])
-        .reduce((sum, value) => sum + value, 0);
-
-      // Apply Logistic Regression
-      const depressionResult = logisticRegression(totalScore);
-
-      // Set the result state
-      setResult(depressionResult);
-      setShowResult(true);
+  const handleSubmit = () => {
+    // Ensure all questions are answered
+    if (Object.keys(answers).length < questions.length) {
+      alert("Please answer all questions before submitting.");
+      return;
     }
-  };
 
-  const handleBack = () => {
-    if (currentQuestion > 0) {
-      setCurrentQuestion(currentQuestion - 1);
-    }
-  };
+    const totalScore = Object.values(answers)
+      .map((answer) => optionValues[answer])
+      .reduce((acc, val) => acc + val, 0);
 
-  const handleQuestionClick = (index) => {
-    setCurrentQuestion(index);
+    const result = logisticRegression(totalScore);
+    setResult(result);
+    setShowResult(true);
   };
 
   return (
     <div className="test-container">
-      <div className="test-legend-card">
-        <h2>Legend</h2>
-        <p><li><strong>Not at all:</strong> 0 points</li></p>
-        <p><li><strong>Several days:</strong> 1 point</li></p>
-        <p><li><strong>More than half the days:</strong> 2 points</li></p>
-        <p><li><strong>Nearly every day:</strong> 3 points</li></p>
-        
-        <h3><strong>Total Score </strong> = 0-27 points</h3>
-        <h2>Interpretation</h2>
-        <p><li><strong>0-4:</strong> Minimal Depression</li></p>
-        <p><li><strong>5-9:</strong> Mild Depression</li></p>
-        <p><li><strong>10-14:</strong> Moderate Depression</li></p>
-        <p><li><strong>15-27:</strong> Severe Depression</li></p>
-        <p><strong>Note:</strong> This test is not a substitute for professional diagnosis or treatment.</p>
-      </div>
-
-      <div className="test-instruction-card">
-        <h2>Instruction</h2>
-        <p>This test is designed to evaluate your <strong>depression levels</strong> using the PHQ-9 scale. Please answer each question honestly based on how you have felt in the <strong>last two weeks</strong>.</p>
-        <p>Click <strong>"Next"</strong> to proceed through the questions. At the end of the test, you will receive a score and feedback on your depression level.</p>
-
-        <p>Remember, this test is not a substitute for professional help. If you are experiencing significant depression, please consider reaching out to a mental health professional.</p>
-      </div>
-
-      <div className="test-card">
-        {!showResult ? (
-          <>
-            <h2>Depression Test (PHQ-9)</h2>
-            <p>{questions[currentQuestion].text}</p>
-            <div className="options">
-              {questions[currentQuestion].options.map((option, index) => (
-                <label key={index} className="option-label">
-                  <input
-                    type="radio"
-                    name={`question-${currentQuestion}`}
-                    value={option}
-                    checked={answers[currentQuestion] === option}
-                    onChange={handleOptionChange}
-                  />
-                  <span>{option}</span>
-                </label>
-              ))}
+      {!showResult ? (
+        <div className="question-section">
+          <h1>Depression Test (PHQ9)</h1>
+          {questions.map((question, index) => (
+            <div key={question.id} className="question-item">
+              <p>{index + 1}. {question.text}</p>
+              <div className="button-options">
+                {question.options.map((option) => (
+                  <button
+                    key={option}
+                    onClick={() => handleOptionSelect(index, option)}
+                    className={`option-button ${
+                      answers[index] === option ? "selected" : ""
+                    }`}
+                  >
+                    {option}
+                  </button>
+                ))}
+              </div>
             </div>
+          ))}
 
-            {/* Question Navigation Shortcuts */}
-            <div className="question-shortcuts">
-              {questions.map((q, index) => (
-                <button
-                  key={q.id}
-                  className={`question-btn ${answers[index] ? "answered" : ""} ${index === currentQuestion ? "active" : ""}`}
-                  onClick={() => handleQuestionClick(index)}
-                >
-                  {q.id}
-                </button>
-              ))}
-            </div>
-
-            <div className="button-group">
-              <button onClick={handleNext} disabled={!answers[currentQuestion]}>
-                {currentQuestion < questions.length - 1 ? "Next" : "Finish"}
-              </button>
-            </div>
-          </>
-        ) : (
-          <div className="result-section">
-            <h2>Test Result</h2>
-            <p><strong>Depression Level:</strong> {result.result}</p>
-            <button onClick={() => window.location.reload()}>Retake Test</button>
-            <button onClick={() => navigate("/")}>Go Back</button>
-          </div>
-        )}
-      </div>
+          <button onClick={handleSubmit} className="submit-button">
+            SUBMIT
+          </button>
+        </div>
+      ) : (
+        <div className="result-section">
+          <h2>Your Result:</h2>
+          <p>{result.result}</p>
+        </div>
+      )}
     </div>
   );
 };

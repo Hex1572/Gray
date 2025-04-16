@@ -1,224 +1,78 @@
 .test-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-  }
-  
-  .test-legend-card {
-    background: #ffffff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    width: 300px;
-    margin-right: 40px;
-    text-align: left;
-    position: absolute;
-    top: 56%;
-    left: 6%;
-    transform: translateY(-50%);
-    font-size: 15px;
-    line-height: 1.6;
-    color: var(--text-dark);
-  }
-  
-  .test-legend-card h2 {
-    text-align:center;
-  }
-  .test-legend-card p {
-    margin: 6px 0;
-  }
-  
-  .test-legend-card li {
-    list-style: disc;
-    margin-left: 20px;
-  }
-  
-  .test-instruction-card {
-    background: #ffffff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    width: 300px;
-    text-align: left;
-    position: absolute;
-    top: 52%;
-    right: 6%;
-    transform: translateY(-50%);
-    font-size: 16px;
-    line-height: 1.6;
-    color: var(--text-dark);
-  }
-  
-  .test-instruction-card h2 {
-    text-align: center;
-    color: #2e7d32;
-    margin-bottom: 10px;
-  }
-  
-  .test-instruction-card p {
-    margin: 10px 0;
-  }
+  color: var(--text-dark);
+  text-align: left;;
+  margin-top: -110px; /* Pull the container up */
   
   
-  .test-card {
-    background: rgb(255, 255, 255);
-    padding: 30px; /* Increased padding */
-    border-radius: 12px; /* Slightly rounded edges */
-    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15); /* More depth */
-    width: 600px; /* Increased width */
-    text-align: center;
+
+}
+.test-container h1 {
+  background-color: rgba(43, 194, 207, 0.144);
+  padding: 2rem;
+  margin-top: -2px;
+  color:rgb(35, 117, 145) ;
+  width: 100vw;         /* Full viewport width */
+  margin-left: -50vw;   /* Shift left by half viewport width */
+  left: 50%;            /* Pull it back to center */
+  position: relative;
+  box-sizing: border-box;
+}
+
+
+.button-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+
   
-    /* Center the card */
-    position: absolute;
-    top: 55%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
+}
+
+.question-item{
+  font-size: 19px;
+}
+.option-button {
+  margin: 0.5rem 0;
+  padding: 0.9rem 1.5rem;
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.2s ease;
+  border-radius: 30px;
+  color: var(--text-dark);
+  font-family: "Montserrat", Arial, Helvetica, sans-serif;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  font-weight: bold;
   
-  .options {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    margin-top: 15px; /* More spacing */
-    font-size: 18px; /* Increased text size */
-  }
-  
-  .option-label {
-    display: flex;
-    align-items: center;
-    margin: 8px 0;
-  }
-  
-  /* Style for selected option */
-  /* Style for the radio input itself */
-  input[type="radio"] {
-    appearance: none; /* Remove default radio button appearance */
-    width: 15px; /* Set a size for the radio button */
-    height: 15px; /* Set a size for the radio button */
-    border-radius: 50%; /* Make it round */
-    border: 2px solid #ccc; /* Light gray border */
-    background-color: #fff; /* White background */
-    margin-right: 10px; /* Space between radio and text */
-    cursor: pointer; /* Pointer cursor for better UX */
-    transition: background-color 0.3s ease, border-color 0.3s ease; /* Smooth transition */
-  }
-  
-  /* Style for when the radio button is selected */
-  input[type="radio"]:checked {
-    background-color: #007bff; /* Blue background when selected */
-    
-    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.5); /* Blue glow effect */
-  }
-  
-  
-  /* When radio is selected, highlight the label */
-  input[type="radio"]:checked + .option-label {
-    background-color: rgba(0, 123, 255, 0.1); /* Light blue background for the label */
-  }
-  
-  /* Additional spacing for better UI */
-  .options {
-    margin-top: 20px;
-  }
-  
-  .option-label {
-    margin: 10px 0;
-  }
-  
-  
-  
-  button {
-    margin-top: 25px; /* More spacing */
-    padding: 12px 18px;
-    font-size: 18px;
-    font-weight: bold;
-    background: rgba(255, 255, 255, 0.3); /* Semi-transparent white */
-    backdrop-filter: blur(8px); /* Slight blur effect */
-    color: #5a5a5a; /* Dark text */
-    border: 2px solid rgba(255, 255, 255, 0.4); /* Subtle border */
-    border-radius: 6px;
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
-  }
-  
-  button:disabled {
-    background: rgba(255, 255, 255, 0.2); /* Even more transparent when disabled */
-    cursor: not-allowed;
-    border: 2px solid rgba(255, 255, 255, 0.2);
-    color: #999; /* Dimmed text */
-  }
-  
-  button:hover:not(:disabled) {
-    background: rgba(255, 255, 255, 0.5); /* More visible on hover */
-    border-color: rgba(255, 255, 255, 0.6);
-  }
-  
-  
-  .options {
-    margin-top: 20px; 
-  }
-  
-  .option-label {
-    margin: 10px 0;
-  }
-  
-  .test-card button {
-    display: block;
-    width: 100%;
-    text-align: center;
-  }
-  
-  .result-section {
-    padding: 30px;
-    font-size: 20px;
-  }
-  
-  .result-section h2 {
-    font-size: 24px;
-    margin-bottom: 15px;
-  }
-  
-  .result-section p {
-    margin: 15px 0;
-  }
-  
-  /* Question Navigation Shortcuts */
-  .question-shortcuts {
-    display: flex;
-    justify-content: center;
-    gap: 10px; /* Space between buttons */
-    margin: 20px 0; /* Space above and below */
-  }
-  
-  .question-btn {
-    width: 40px; /* Square size */
-    height: 40px; /* Square size */
-    font-size: 16px;
-    font-weight: bold;
-    background: rgba(255, 255, 255, 0.3); /* Semi-transparent */
-    backdrop-filter: blur(8px);
-    color: #5a5a5a;
-    border: 2px solid rgba(255, 255, 255, 0.4);
-    border-radius: 8px; /* Rounded for a smooth look */
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
-  }
-  
-  .question-btn:hover {
-    background: rgba(255, 255, 255, 0.5);
-    border-color: rgba(255, 255, 255, 0.6);
-  }
-  
-  .question-btn.answered {
-    background: #c8e6c9; /* Light green for answered questions */
-    color: #2e7d32;
-    border-color: #81c784;
-  }
-  
-  .question-btn.active {
-    background: rgba(255, 255, 255, 0.8); /* Highlight active question */
-    border-color: #5a5a5a;
-    color: black;
-  }
-  
+}
+
+
+
+.option-button:hover {
+  background-color: #d0f0ff;
+}
+
+.option-button.selected {
+  background-color: rgba(43, 193, 207, 0.5);
+  color: white;
+  font-weight: bold;
+  border: 2px solid #009acd;
+}
+
+.submit-button {
+  margin-top: 2rem;
+  padding: 0.9rem 4rem;
+  background-color: #048bb8;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-left: 80%;
+  font-size: 1rem;
+  transition: background-color 0.2s ease;
+}
+.submit-button:hover {
+  background-color: #07486b;
+}

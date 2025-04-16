@@ -1,32 +1,22 @@
 .mental-container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  height: 100vh; /* Full height of viewport */
-  width: 100%; /* Full width */
+  justify-content: center;
+  padding: 20px;
+  color: var(--text-dark);
+}
+
+.mental-description button {
+  font-size: 20px;
+  margin-bottom: 20px;
   text-align: center;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  border-radius: 30px;
+  background-color: rgba(8, 134, 143, 0.699);
+  font-weight: bold;
 }
 
-.content-wrapper {
-  max-width: 700px;
-  width: 100%;
-  line-height: 1.6;
-}
 
-ul {
-  padding-left: 20px;
-}
-
-button {
-  margin-top: 20px;
-  padding: 10px 20px;
-  cursor: pointer;
-}
 
 
 

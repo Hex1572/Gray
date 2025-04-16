@@ -1,0 +1,101 @@
+
+
+.dashboard-1{
+  background-color: rgba(127, 236, 255, 0.226);
+  padding: 2rem;
+}
+
+
+#title1{
+  margin-left: 50px; 
+    font-size: 40px;
+    color: var(--text-dark);
+    
+}
+  .dashboard-description1 li {
+    margin-left: 15%;
+   
+  }
+  .dashboard-2{ 
+    padding-top: 3rem;;
+    margin: 50px; 
+    font-size: 2rem;
+    color: var(--text-dark);
+    border-color: black;
+    border-radius: 60px;
+    background-color: rgba(127, 236, 255, 0.226);
+    padding: 2.5rem;
+    
+  }
+
+  .dashboard-description1, .dashboard-description2 p{
+    
+    margin-left: 10%;
+    padding-right: 40%; 
+    font-size: 1.3rem;
+    color: var(--text-dark);
+  }
+
+  .abouts {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    padding: 2rem;
+    flex-wrap: wrap;
+    padding-top: 1px;
+  }
+  
+  .about-system{
+    
+    flex: 1 1 40%;
+    padding: 2rem;
+    color: var(--text-dark);
+    margin-bottom: 15rem;
+    border-radius: 60px 60px 6px 60px;
+    background-color: rgba(127, 236, 255, 0.226);
+    min-width: 300px; /* helps with responsiveness */
+  }
+
+  .about-devs {
+    flex: 1 1 40%;
+    padding: 2rem;
+    color: white;
+    border-radius: 6px 60px 60px 60px;
+   
+    background-color: rgba(95, 141, 241, 0.664);
+    min-width: 300px; /* helps with responsiveness */
+    margin-top: 15rem; /* << This creates the slight vertical offset */
+    
+    
+  }
+  .name-devs{
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem; /* Adds space between names */
+    margin-top: 1rem;
+    font-size: 1.2rem;
+    border-radius: 60px;
+    padding-left: 20%;
+    padding-right: 20%;
+  }
+  
+  .name-devs button{
+    background-color: rgba(47, 133, 190, 0);
+    border: none;
+    color: var(--text-dark);
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 1rem;
+    color:white;
+    margin: 0.5rem 0;
+    border-radius: 60px;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .name-devs button:hover{
+    background-color: rgba(40, 107, 151, 0.5);
+    color: rgb(219, 231, 255) !important;
+  }
+
+  

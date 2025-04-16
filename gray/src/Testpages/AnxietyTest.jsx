@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom"; // Import useNavigate
-import "../testDesign/AnxietyTest.css"; // Import CSS for styling
+import { useNavigate } from "react-router-dom";
+import "../testDesign/EatingTest.css";
 
 const questions = [
   {
@@ -40,7 +40,6 @@ const questions = [
   },
 ];
 
-// Assign numerical values to options for logistic regression
 const optionValues = {
   "Not at all": 0,
   "Several days": 1,
@@ -61,133 +60,69 @@ const logisticRegression = (score) => {
 };
 
 const AnxietyTest = () => {
-  const navigate = useNavigate(); // Initialize navigate function
-  const [currentQuestion, setCurrentQuestion] = useState(0);
+  const navigate = useNavigate();
   const [answers, setAnswers] = useState({});
   const [showResult, setShowResult] = useState(false);
   const [result, setResult] = useState(null);
 
-  const handleOptionChange = (event) => {
-    setAnswers({
-      ...answers,
-      [currentQuestion]: event.target.value,
-    });
+  const handleOptionSelect = (questionIndex, selectedOption) => {
+    setAnswers((prev) => ({
+      ...prev,
+      [questionIndex]: selectedOption,
+    }));
   };
 
-  const handleNext = () => {
-    if (currentQuestion < questions.length - 1) {
-      setCurrentQuestion(currentQuestion + 1);
-    } else {
-      // Calculate the anxiety score
-      const totalScore = Object.values(answers)
-        .map((ans) => optionValues[ans])
-        .reduce((sum, value) => sum + value, 0);
-
-      // Apply Logistic Regression
-      const anxietyResult = logisticRegression(totalScore);
-
-      // Set the result state
-      setResult(anxietyResult);
-      setShowResult(true);
+  const handleSubmit = () => {
+    if (Object.keys(answers).length < questions.length) {
+      alert("Please answer all the questions before submitting.");
+      return;
     }
-  };
 
-  const handleBack = () => {
-    if (currentQuestion > 0) {
-      setCurrentQuestion(currentQuestion - 1);
-    }
-  };
+    const totalScore = Object.values(answers)
+      .map((ans) => optionValues[ans])
+      .reduce((sum, value) => sum + value, 0);
 
-  const handleQuestionClick = (index) => {
-    setCurrentQuestion(index);
+    const anxietyResult = logisticRegression(totalScore);
+
+    setResult(anxietyResult);
+    setShowResult(true);
   };
 
   return (
-  
     <div className="test-container">
+      <h1>Anxiety Test (GAD-7)</h1>
 
-
-      <div className="test-legend-card"> 
-        <h2>Legend</h2>
-        <p><li><strong>Not at all:</strong> 0 points</li></p> 
-        <p><li><strong>Several days:</strong> 1 point</li></p>
-        <p><li><strong>More than half the days:</strong> 2 points</li></p>
-        <p><li><strong>Nearly every day:</strong> 3 points</li></p>
-        
-        <h3><strong>Total Score </strong> = 0-21 points</h3>
-        <h2>Interpretation</h2>
-        <p><li><strong>0-4:</strong> Minimal Anxiety</li></p>
-        <p><li><strong>5-9:</strong> Mild Anxiety</li></p>
-        <p><li><strong>10-14:</strong> Moderate Anxiety</li></p>
-        <p><li><strong>15-21:</strong> Severe Anxiety</li></p>
-        <p><strong>Note:</strong> This test is not a substitute for professional diagnosis or treatment.</p>
-      </div>
-
-
-
-
-      <div className="test-instruction-card">
-        <h2>Instruction</h2>
-        <p>This test is designed to evaluate your <strong>anxiety levels</strong>. Please answer each question honestly based on how you have felt in the <strong>last two weeks</strong>.</p>
-        <p>Click <strong>"Next"</strong> to proceed through the questions. At the end of the test, you will receive a score and feedback on your anxiety level.</p>
-
-        <p>Remember, this test is not a substitute for professional help. If you are experiencing significant anxiety, please consider reaching out to a mental health professional.</p>
-      </div>
-
-
-
-
-
-      <div className="test-card">
-        {!showResult ? (
-          <>
-            <h2>Anxiety Test (GAD-7)</h2>
-            <p>{questions[currentQuestion].text}</p>
-            <div className="options">
-              {questions[currentQuestion].options.map((option, index) => (
-                <label key={index} className="option-label">
-                  <input
-                    type="radio"
-                    name={`question-${currentQuestion}`}
-                    value={option}
-                    checked={answers[currentQuestion] === option}
-                    onChange={handleOptionChange}
-                  />
-                  <span>{option}</span>
-                </label>
-              ))}
+      {!showResult ? (
+        <div className="question-section">
+          {questions.map((question, index) => (
+            <div key={question.id} className="question-item">
+              <p>{index + 1}. {question.text}</p>
+              <div className="button-options">
+                {question.options.map((option) => (
+                  <button
+                    key={option}
+                    onClick={() => handleOptionSelect(index, option)}
+                    className={`option-button ${
+                      answers[index] === option ? "selected" : ""
+                    }`}
+                  >
+                    {option}
+                  </button>
+                ))}
+              </div>
             </div>
+          ))}
 
-            {/* Question Navigation Shortcuts */}
-            <div className="question-shortcuts">
-              {questions.map((q, index) => (
-                <button
-                  key={q.id}
-                  className={`question-btn ${answers[index] ? "answered" : ""} ${
-                    index === currentQuestion ? "active" : ""
-                  }`}
-                  onClick={() => handleQuestionClick(index)}
-                >
-                  {q.id}
-                </button>
-              ))}
-            </div>
-
-            <div className="button-group">
-              <button onClick={handleNext} disabled={!answers[currentQuestion]}>
-                {currentQuestion < questions.length - 1 ? "Next" : "Finish"}
-              </button>
-            </div>
-          </>
-        ) : (
-          <div className="result-section">
-            <h2>Test Result</h2>
-            <p><strong>Anxiety Level:</strong> {result.result}</p>
-            <button onClick={() => window.location.reload()}>Retake Test</button>
-            <button onClick={() => navigate("/")}>Go Back</button>
-          </div>
-        )}
-      </div>
+          <button onClick={handleSubmit} className="submit-button">
+            SUBMIT
+          </button>
+        </div>
+      ) : (
+        <div className="result-section">
+          <h2>Your Result:</h2>
+          <p>{result.result}</p>
+        </div>
+      )}
     </div>
   );
 };

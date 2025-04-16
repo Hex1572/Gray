@@ -6,9 +6,11 @@ const Depression = () => {
 
   return (
     <div className="mental-container">
+      <div className="mental-description">  
       <h2>Depression Test</h2>
       <p>Assess your level of Depression with this quick test.</p>
       <button onClick={() => navigate("/depression-test")}>Start Test</button>
+    </div>
     </div>
   );
 };
