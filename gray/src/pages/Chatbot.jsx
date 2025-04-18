@@ -4,7 +4,7 @@ import Header from "../components/Header";
 
 function Chatbot() {
   const [messages, setMessages] = useState([
-    { sender: 'bot', text: 'Hi! I\'m your mental health chatbot. How can I support you today?' }
+    { sender: 'bot', text: "Hi! I'm your mental health chatbot. How can I support you today?" }
   ]);
   const [input, setInput] = useState('');
 
@@ -15,8 +15,6 @@ function Chatbot() {
     setMessages(prev => [...prev, newMessage]);
 
     const userInput = input.toLowerCase();
-
-
 
 
     //eto yung response ng chatbot sa mga keywords na sinend ng user
@@ -71,10 +69,7 @@ function Chatbot() {
       }
     ];
 
-
-
-
-    //eto naman ung default
+    //eto naman ung default na response ng chatbot kung walang keywords na sinend ang user
     let botReply = "I'm here to help. Could you tell me more about how you're feeling?";
 
     for (const topic of topics) {
