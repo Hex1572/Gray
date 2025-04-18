@@ -2,9 +2,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../testDesign/EatingTest.css";
 
-// BFI-10 Questions
 const questions = [
-  { id: 1,text: "I see myself as someone who is talkative.", options: ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"] },
+  { id: 1, text: "I see myself as someone who is talkative.", options: ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"] },
   { id: 2, text: "I see myself as someone who is reserved.", options: ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"] },
   { id: 3, text: "I see myself as someone who is outgoing, sociable.", options: ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"] },
   { id: 4, text: "I see myself as someone who tends to find fault with others.", options: ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"] },
@@ -27,14 +26,28 @@ const optionValues = {
 const calculatePersonality = (scores) => {
   return {
     Extraversion: scores[0] + scores[2] + scores[9],
-    Agreeableness: scores[4] + (6 - scores[3]), // Reverse-coded
+    Agreeableness: scores[4] + (6 - scores[3]), // reverse-coded
     Neuroticism: scores[6] + scores[7],
     Openness: scores[8],
-    Conscientiousness: scores[5] + (6 - scores[1]), // Reverse-coded
+    Conscientiousness: scores[5] + (6 - scores[1]), // reverse-coded
   };
 };
 
-const EatingTest = () => {
+const traitDescriptions = {
+  Extraversion:
+    "Extraversion reflects how outgoing, energetic, and sociable you are. High scores indicate a preference for social situations, enthusiasm, and assertiveness.",
+  Agreeableness:
+    "Agreeableness indicates how compassionate and cooperative you are toward others. Higher scores reflect empathy, generosity, and kindness.",
+  Neuroticism:
+    "Neuroticism reflects emotional instability and how prone you are to psychological stress. Higher scores suggest sensitivity and moodiness.",
+  Openness:
+    "Openness describes your imagination and insight. High scores show curiosity, creativity, and a preference for variety and new experiences.",
+  Conscientiousness:
+    "Conscientiousness is about being organized, dependable, and goal-oriented. Higher scores indicate self-discipline, carefulness, and reliability.",
+};
+
+const PersonalityTest = () => {
+  const navigate = useNavigate();
   const [answers, setAnswers] = useState({});
   const [showResult, setShowResult] = useState(false);
   const [result, setResult] = useState(null);
@@ -85,10 +98,23 @@ const EatingTest = () => {
         </div>
       ) : (
         <div className="result-section">
-          <h2>Your Personality Trait Scores:</h2>
+          <h2>Your Personality Trait Scores</h2>
           <ul>
             {Object.entries(result).map(([trait, value]) => (
-              <li key={trait}><strong>{trait}:</strong> {value}</li>
+              <li key={trait}>
+                <strong>{trait}:</strong> {value} <br />
+                <span className="trait-description">{traitDescriptions[trait]}</span>
+              </li>
+            ))}
+          </ul>
+
+          <h3>Your Answers:</h3>
+          <ul>
+            {questions.map((q, i) => (
+              <li key={q.id}>
+                <strong>{i + 1}. {q.text}</strong><br />
+                <span style={{ color: "#0c7db1" }}>Your answer: {answers[i]}</span>
+              </li>
             ))}
           </ul>
         </div>
@@ -97,4 +123,4 @@ const EatingTest = () => {
   );
 };
 
-export default EatingTest;
+export default PersonalityTest;

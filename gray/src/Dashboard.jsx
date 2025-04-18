@@ -1,17 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import { useLocation } from "react-router-dom";
-import DashboardView from "./pages/DashboardView";
 
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import DashboardView from "./pages/DashboardView";
 
 const Dashboard = ({ children }) => {
   const location = useLocation();
-  const [showHelp, setShowHelp] = useState(false);
-  const [showAbout, setShowAbout] = useState(false);
-  const [showDevs, setShowDevs] = useState(false);
 
-  const hideButtonsOnRoutes = [
+  //routes na maghihide once na pumindot ako sa isa sa mga buttons
+  const hideDashboardViewOnRoutes = [
     "/anxiety",
     "/depression",
     "/well-being",
@@ -19,30 +17,30 @@ const Dashboard = ({ children }) => {
     "/anxiety-test",
     "/depression-test",
     "/well-being-test",
-    "/eating-disorder-test"
+    "/eating-disorder-test",
   ];
 
-  const shouldHideButtons = hideButtonsOnRoutes.includes(location.pathname);
+  const shouldShowDashboardView = !hideDashboardViewOnRoutes.includes(location.pathname);
 
   return (
     <div className="dashboard">
-      {/* Header is no longer fixed; it will now scroll with the page */}
-      <Header onLoginClick={() => console.log("Login clicked")} />
-      {/* Conditionally render TestButtons and DashboardView */}
-      {!shouldHideButtons && (
-        <>
-          <DashboardView />
-        </>
-        
-      )}
 
+
+
+      {/* Header */}
+      <Header onLoginClick={() => console.log("Login clicked")} />
+
+
+      {/* Dashboard View - show only on specific routes */}
+      {shouldShowDashboardView && <DashboardView />}
+
+
+
+      {/* Render nested route content */}
       <main className="main-content">{children}</main>
 
-      
-          
-
-      {/* Footer Component */}
-      <Footer/>
+      {/* Footer */}
+      <Footer />
     </div>
   );
 };

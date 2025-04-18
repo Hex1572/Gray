@@ -1,101 +1,180 @@
-
-
-.dashboard-1{
+/* General Dashboard Styles */
+.dashboard-1 {
   background-color: rgba(127, 236, 255, 0.226);
   padding: 2rem;
 }
 
-
-#title1{
-  margin-left: 50px; 
-    font-size: 40px;
-    color: var(--text-dark);
-    
+#title1 {
+  margin-left: 50px;
+  font-size: 40px;
+  color: var(--text-dark);
 }
-  .dashboard-description1 li {
-    margin-left: 15%;
-   
-  }
-  .dashboard-2{ 
-    padding-top: 3rem;;
-    margin: 50px; 
-    font-size: 2rem;
-    color: var(--text-dark);
-    border-color: black;
-    border-radius: 60px;
-    background-color: rgba(127, 236, 255, 0.226);
-    padding: 2.5rem;
-    
-  }
 
-  .dashboard-description1, .dashboard-description2 p{
-    
-    margin-left: 10%;
-    padding-right: 40%; 
-    font-size: 1.3rem;
-    color: var(--text-dark);
-  }
+.dashboard-description1 li {
+  margin-left: 15%;
+}
 
-  .abouts {
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
-    padding: 2rem;
-    flex-wrap: wrap;
-    padding-top: 1px;
-  }
-  
-  .about-system{
-    
-    flex: 1 1 40%;
-    padding: 2rem;
-    color: var(--text-dark);
-    margin-bottom: 100px;
-    border-radius: 60px 60px 6px 60px;
-    background-color: rgba(127, 236, 255, 0.226);
-    min-width: 300px; /* helps with responsiveness */
-  }
+.dashboard-2 {
+  padding-top: 3rem;
+  margin: 50px;
+  font-size: 2rem;
+  color: var(--text-dark);
+  border-color: black;
+  border-radius: 60px;
+  background-color: rgba(127, 236, 255, 0.226);
+  padding: 2.5rem;
+}
 
-  .about-devs {
-    flex: 1 1 40%;
-    padding: 2rem;
-    color: white;
-    border-radius: 6px 60px 60px 60px;
-   
-    background-color: rgba(95, 141, 241, 0.664);
-    min-width: 300px; /* helps with responsiveness */
-    margin-top: 100px; /* << This creates the slight vertical offset */
-    
-    
-  }
-  .name-devs{
-    display: flex;
-    flex-direction: column;
-    gap: 0.8rem; /* Adds space between names */
-    margin-top: 1rem;
-    font-size: 1.2rem;
-    border-radius: 60px;
-    padding-left: 20%;
-    padding-right: 20%;
-  }
-  
-  .name-devs button{
-    background-color: rgba(47, 133, 190, 0);
-    border: none;
-    color: var(--text-dark);
-    font-size: 1.2rem;
-    cursor: pointer;
-    padding: 1rem;
-    color:white;
-    margin: 0.5rem 0;
-    border-radius: 60px;
-    transition: all 0.3s ease-in-out;
-  }
+.dashboard-description1,
+.dashboard-description2 p {
+  margin-left: 10%;
+  padding-right: 40%;
+  font-size: 1.3rem;
+  color: var(--text-dark);
+}
 
-  .name-devs button:hover{
-    background-color: rgba(40, 107, 151, 0.5);
-    color: rgb(219, 231, 255) !important;
-  }
+/* About Section */
+.abouts {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  padding: 2rem;
+  flex-wrap: wrap;
+  padding-top: 1px;
+}
 
-  
+.about-system {
+  flex: 1 1 40%;
+  padding: 2rem;
+  color: var(--text-dark);
+  margin-bottom: 100px;
+  border-radius: 60px 60px 6px 60px;
+  background-color: rgba(127, 236, 255, 0.226);
+  min-width: 300px;
+}
+
+.about-devs {
+  flex: 1 1 40%;
+  padding: 2rem;
+  background: linear-gradient(to right, #6fa8ffb6, #85c9ffb0);
+  color: #ffffff;
+  border-radius: 6px 60px 60px 60px;
+  min-width: 300px;
+  margin-top: 100px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.about-devs h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 1.8rem;
+}
+
+.developers-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 0 1rem;
+  font-size: 1.1rem;
+}
+
+.developer-button {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1.1rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  color: #fff;
+}
+
+.developer-button:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-3px);
+}
+
+
+
+/* cahtbot at peer support button container */
+.dashboard-chatbot {
+  display: flex;
+  flex-direction: column;  
+  justify-content: center;
+  align-items: center;
+  margin: 3rem auto;
+  gap: 1rem; 
+}
+
+/* chatbot button styling */
+.footer-button {
+  padding: 1rem 2.5rem;
+  font-size: 1.2rem;
+  background-color: rgba(95, 141, 241, 0.9);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.footer-button:hover {
+  background-color: rgba(40, 107, 151, 0.9);
+  color: #e6f0ff;
+  transform: scale(1.05);
+}
+
+/* peer dupport button styling */
+.peer-support-btn {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.peer-support-btn:hover {
+  background-color: #45a049;
+}
+
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 80%;
+  max-width: 600px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  color: var(--text-dark);
+}
+
+.close-modal-btn {
+  background-color: #ff5c5c;
+  border: none;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.close-modal-btn:hover {
+  background-color: #ff3333;
+}

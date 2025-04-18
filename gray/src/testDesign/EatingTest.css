@@ -77,8 +77,7 @@
 .submit-button:hover {
   background-color: #07486b;
 }
-/* Default styles (already present) */
-/* You can keep your existing styles here */
+
 
 /* Tablets (768px and below) */
 @media screen and (max-width: 768px) {
@@ -127,4 +126,17 @@
   .question-item {
     font-size: 17px;
   }
+}
+.result-section ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 1rem;
+}
+
+.result-section li {
+  margin-bottom: 1rem;
+  background-color: #f7fafa;
+  padding: 1rem;
+  border-radius: 8px;
+  border-left: 4px solid #009acd;
 }

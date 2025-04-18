@@ -5,6 +5,7 @@
   justify-content: center;
   padding: 20px;
   color: var(--text-dark);
+  padding: 2rem;
 }
 
 .mental-description button {
@@ -16,7 +17,17 @@
   font-weight: bold;
 }
 
+.mental-description h2 {
+  margin-bottom: 1rem;
+}
 
+.mental-description p {
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
 
-
-
+.mental-description ul {
+  text-align: left;
+  margin-left: 1.5rem;
+  list-style-type: disc;
+}

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../testDesign/EatingTest.css";
 
+//mga tanong at mga choices ni user
 const questions = [
   { id: 1, text: "Little interest or pleasure in doing things?", options: ["Not at all", "Several days", "More than half the days", "Nearly every day"] },
   { id: 2, text: "Feeling down, depressed, or hopeless?", options: ["Not at all", "Several days", "More than half the days", "Nearly every day"] },
@@ -14,6 +15,7 @@ const questions = [
   { id: 9, text: "Thoughts that you would be better off dead, or of hurting yourself in some way?", options: ["Not at all", "Several days", "More than half the days", "Nearly every day"] },
 ];
 
+//scoring para sa mga choices ni user
 const optionValues = {
   "Not at all": 0,
   "Several days": 1,
@@ -21,22 +23,43 @@ const optionValues = {
   "Nearly every day": 3,
 };
 
-const logisticRegression = (score) => {
+//eto yung function at computation para sa score ni user
+const getDepressionResult = (score) => {
   if (score >= 20) {
-    return { result: "Severe Depression – Please seek professional help." };
+    return {
+      result: "Severe Depression – Please seek professional help.",
+      description: "Your score suggests severe depression. It's strongly recommended that you consult a mental health professional for a full evaluation and support. You are not alone, and there are treatments that can help.",
+    };
   } else if (score >= 15) {
-    return { result: "Moderate Depression – Keep monitoring and consider reaching out for support." };
+    return {
+      result: "Moderately Severe Depression – Consider speaking with a professional.",
+      description: "Your score suggests a significant level of depression. It would be beneficial to speak with a therapist or counselor to explore ways to feel better and receive appropriate care.",
+    };
   } else if (score >= 10) {
-    return { result: "Mild Depression – Be mindful of your well-being." };
+    return {
+      result: "Moderate Depression – Monitor and take care of yourself.",
+      description: "You may be experiencing some symptoms of depression. While it may not require immediate intervention, it's important to monitor your mental health and practice good self-care. If symptoms persist, seek guidance.",
+    };
+  } else if (score >= 5) {
+    return {
+      result: "Mild Depression – Be mindful of your mental well-being.",
+      description: "Your score suggests mild depression. Life stressors may be contributing, so focus on self-care and emotional wellness. If symptoms increase, consider reaching out for help.",
+    };
   } else {
-    return { result: "Minimal Depression – Keep taking care of yourself!" };
+    return {
+      result: "Minimal Depression – You're doing well.",
+      description: "Your score indicates minimal or no depression symptoms. Keep taking care of your mental health and seek support if things change.",
+    };
   }
 };
 
+// eto yung function na nagrerepresent sa depression test
+// at kung pano nagwowork, kung ano ang mga tanong at mga choices ni user
 const DepressionTest = () => {
   const [answers, setAnswers] = useState({});
   const [showResult, setShowResult] = useState(false);
   const [result, setResult] = useState(null);
+  const [score, setScore] = useState(0);
 
   const handleOptionSelect = (questionIndex, selectedOption) => {
     setAnswers((prevAnswers) => ({
@@ -46,7 +69,6 @@ const DepressionTest = () => {
   };
 
   const handleSubmit = () => {
-    // Ensure all questions are answered
     if (Object.keys(answers).length < questions.length) {
       alert("Please answer all questions before submitting.");
       return;
@@ -56,8 +78,9 @@ const DepressionTest = () => {
       .map((answer) => optionValues[answer])
       .reduce((acc, val) => acc + val, 0);
 
-    const result = logisticRegression(totalScore);
-    setResult(result);
+    const evaluation = getDepressionResult(totalScore);
+    setScore(totalScore);
+    setResult(evaluation);
     setShowResult(true);
   };
 
@@ -92,7 +115,19 @@ const DepressionTest = () => {
       ) : (
         <div className="result-section">
           <h2>Your Result:</h2>
-          <p>{result.result}</p>
+          <p><strong>Score:</strong> {score} / {questions.length * 3}</p>
+          <p><strong>{result.result}</strong></p>
+          <p>{result.description}</p>
+
+          <h3>Your Answers:</h3>
+          <ul>
+            {questions.map((question, index) => (
+              <li key={question.id}>
+                <strong>{index + 1}. {question.text}</strong><br />
+                <span style={{ color: "#048bb8" }}>Your answer: {answers[index]}</span>
+              </li>
+            ))}
+          </ul>
         </div>
       )}
     </div>

@@ -1,6 +1,6 @@
-// components/Footer.jsx
+
 import React from "react";
-import "../componentDesign/HeaderFooter.css"; // Import CSS for styling
+import "../componentDesign/HeaderFooter.css";
 const Footer = ({ setShowHelp, setShowAbout, setShowDevs }) => {
   return (
     <div className="footer">
@@ -8,6 +8,9 @@ const Footer = ({ setShowHelp, setShowAbout, setShowDevs }) => {
         <p>&copy; 2025 Mental Health Dashboard. All rights reserved.</p>
        
       </div>
+
+
+
     </div>
   );
 };

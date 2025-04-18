@@ -1,9 +1,5 @@
-:root {
-  --cream: #f5e6cc;
-  --white: rgba(255, 255, 255, 0.5);
+:root { 
   --text-dark: #5a5a5a;
-  --button-bg: #e0c8a9;
-  --button-hover: #d1b495;
 }
 
 html, body {
@@ -53,7 +49,7 @@ html, body {
   color: var(--text-dark) !important;
 }
 
-/* Default styles stay as is */
+
 
 /* Tablets (max-width: 768px) */
 @media screen and (max-width: 768px) {
@@ -84,6 +80,13 @@ html, body {
   }
 }
 
-
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  
+  position: fixed;
+}
 
 

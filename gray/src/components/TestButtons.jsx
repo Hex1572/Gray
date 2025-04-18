@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "../componentDesign/TestButtons.css"; // Import CSS for styling
+import "../componentDesign/TestButtons.css";
 
 
 const TestButtons = () => {
@@ -9,7 +9,9 @@ const TestButtons = () => {
       <Link to="/anxiety" className="test-button">Anxiety Test</Link>
       <Link to="/depression" className="test-button">Depression Test</Link>
       <Link to="/well-being" className="test-button">Well-Being Test</Link>
-      <Link to="/eating-disorder" className="test-button">Personal Test</Link>
+      <Link to="/eating-disorder" className="test-button">Personality Test</Link>
+      
+      
     </div>
   );
 };
