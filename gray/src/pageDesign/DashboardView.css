@@ -167,3 +167,43 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   text-align: justify;
 }
+/* PeerSup */
+.dashboard-wrapper {
+  padding: 1rem;  /* Reduced padding */
+  text-align: center;
+  max-width: 1000px;  /* Reduced max-width */
+  margin: 0 auto;
+}
+
+.dashboard-description2 {
+  margin-bottom: 1.5rem;
+  font-size: 0.875rem;  /* Reduced font size */
+  color: #4a5568;
+}
+
+.support-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));  /* Reduced the min-width for the grid items */
+  gap: 1rem;  /* Reduced gap */
+}
+
+.support-card {
+  background: linear-gradient(135deg, #f7fafc, #edf2f7);
+  border-radius: 40px 40px 6px 40px;  /* Reduced border-radius for a smaller look */
+  padding: 1.25rem;  /* Reduced padding */
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  border: 1px solid #e2e8f0;
+  position: relative;
+  overflow: hidden;
+  font-family: 'Arial', sans-serif;  /* Example font change */
+  font-size: 0.875rem;  /* Reduced font size */
+}
+
+.support-card:hover {
+  background: linear-gradient(135deg, #e2e8f0, #cbd5e0);
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  border-radius: 40px 40px 6px 40px; /* Keep it consistent with the reduced size */
+}
