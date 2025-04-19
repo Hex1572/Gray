@@ -66,7 +66,7 @@ const Login = ({ onClose }) => {
     Login
   </button>
   <button className={!isLogin ? "active" : ""} onClick={() => setIsLogin(false)}>
-    Register
+    Sign Up
   </button>
         </div>
 

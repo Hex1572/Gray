@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./PeerSupport.css";
 
 const spaces = [
@@ -10,8 +10,8 @@ const spaces = [
   "Life Advice",
 ];
 
-const PeerSupport = () => {
-  const [activeSpace, setActiveSpace] = useState("Community Support");
+const PeerSupport = ({ initialSpace = "Community Support" }) => {
+  const [activeSpace, setActiveSpace] = useState(initialSpace);
   const [postInput, setPostInput] = useState("");
   const [posts, setPosts] = useState({
     "Community Support": [],
@@ -20,6 +20,10 @@ const PeerSupport = () => {
     "Motivation": [],
     "Life Advice": [],
   });
+
+  useEffect(() => {
+    setActiveSpace(initialSpace);
+  }, [initialSpace]);
 
   const handlePost = () => {
     if (!postInput.trim()) return;

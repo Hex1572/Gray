@@ -3,10 +3,10 @@
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: stretch;
-    gap: 2rem;
+    gap: 9rem;
     padding: 2rem;
     margin: 0 auto;
-    max-width: 1200px;
+    max-width: 120rem;
   }
   
   /* Shared base style for all about cards */
@@ -23,6 +23,7 @@
   /* === Individual Card Styles === */
   
   .about-system {
+    margin-top: 10%;
     background-color: rgba(127, 236, 255, 0.226);
     color: var(--text-dark);
     border-radius: 30px;

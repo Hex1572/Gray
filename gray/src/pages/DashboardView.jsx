@@ -11,6 +11,7 @@ const DashboardView = () => {
   const [isChatbotVisible, setIsChatbotVisible] = useState(false);
   const [showLearnMore, setShowLearnMore] = useState(false);
   const [showPeerSupport, setShowPeerSupport] = useState(false);
+  const [selectedSpace, setSelectedSpace] = useState("Community Support");
   const chatbotButtonRef = useRef(null);
 
   const supportCards = [
@@ -102,17 +103,14 @@ const DashboardView = () => {
             <p>
               Mental health refers to a person’s emotional, psychological, and social well-being.
               It influences how individuals think, feel, and behave, especially in response to stress,
-              relationships, and daily challenges. Good mental health allows people to cope with
-              the normal stresses of life, work productively, and build meaningful relationships.
-              It also plays a vital role in decision-making, self-confidence, and emotional resilience.
+              relationships, and daily challenges.
             </p>
             <p>
-              There are many ways to support your mental health—like talking to a professional, staying connected
-              to others, maintaining a healthy lifestyle, practicing mindfulness, and getting enough sleep.
+              There are many ways to support your mental health—like talking to a professional, staying connected,
+              practicing mindfulness, and getting enough sleep.
             </p>
             <p>
-              Remember: seeking help is a strength, not a weakness. Taking care of your mental well-being is just
-              as important as taking care of your physical health.
+              Remember: seeking help is a strength, not a weakness.
             </p>
           </div>
         )}
@@ -135,8 +133,8 @@ const DashboardView = () => {
               key={card.title}
               className="support-card"
               onClick={() => {
+                setSelectedSpace(card.space);
                 setShowPeerSupport(true);
-                setModalContent({ space: card.space });
               }}
             >
               <h3>{card.title}</h3>
@@ -148,21 +146,12 @@ const DashboardView = () => {
 
       {showPeerSupport && (
         <div className="peer-support-section">
-          <PeerSupport initialSpace={modalContent?.space || "Community Support"} />
+          <PeerSupport initialSpace={selectedSpace} />
           <button onClick={() => setShowPeerSupport(false)} className="close-modal-btn">
             close
           </button>
         </div>
       )}
-
-      <div className="abouts">
-        <div className="about-system">
-          <h2>About the System</h2>
-          <p>
-            This system is designed to help people in understanding and self-evaluation of their mental well-being using Artificial Intelligence. There are tests for anxiety, depression, general well-being, and personality characteristics. The scoring in different categories is analyzed via a logistic regression model, which further helps in classifying the results as per risk levels. An AI chatbot helps one in guided self-reflection; a peer support is there for enabling safe, anonymous sharing and encouragement. The system is designed with the perspective of user privacy, ethical interactions, and early detection to support overall mental well-being.
-          </p>
-        </div>
-      </div>
 
       <About openModal={openModal} />
 

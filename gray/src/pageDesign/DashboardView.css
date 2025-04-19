@@ -1,5 +1,6 @@
 /* General Dashboard Styles */
 .dashboard-1 {
+  margin-top: 2rem;
   background-color: rgba(127, 236, 255, 0.226);
   padding: 2rem;
 }
@@ -17,7 +18,7 @@
 
 .dashboard-2 {
   padding-top: 3rem;
-  margin: 50px;
+  margin: 100px;
   font-size: 2rem;
   color: var(--text-dark);
   border-color: black;
