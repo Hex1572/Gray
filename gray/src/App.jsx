@@ -32,6 +32,8 @@ const App = () => {
                 <Route path="/well-being-test" element={<WellTest />} />
                 <Route path="/eating-disorder" element={<EatingDisorder />} />
                 <Route path="/eating-disorder-test" element={<EatingTest />} />
+                {/* <Route path="/peer-support" element={<PeerSupport />} /> */}
+
               </Routes>
             </Dashboard>
           }

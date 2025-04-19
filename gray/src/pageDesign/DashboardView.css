@@ -178,3 +178,37 @@
 .close-modal-btn:hover {
   background-color: #ff3333;
 }
+/* PeerSup */
+
+.dashboard-wrapper {
+  padding: 1.5rem;
+  text-align: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.dashboard-description2 {
+  margin-bottom: 1.5rem;
+  font-size: 1rem;
+  color: #4a5568;
+}
+
+.support-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.support-card {
+  background-color: #edf2f7;
+  border-radius: 12px;
+  padding: 1.25rem;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: 0.3s ease;
+}
+
+.support-card:hover {
+  background-color: #e2e8f0;
+  transform: translateY(-4px);
+}
