@@ -12,6 +12,7 @@
 
 .dashboard-description1 li {
   margin-left: 15%;
+  text-align: justify;
 }
 
 .dashboard-2 {
@@ -31,85 +32,25 @@
   padding-right: 40%;
   font-size: 1.3rem;
   color: var(--text-dark);
+  text-align: justify;
 }
 
-/* About Section */
-.abouts {
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
-  padding: 2rem;
-  flex-wrap: wrap;
-  padding-top: 1px;
-}
-
-.about-system {
-  flex: 1 1 40%;
-  padding: 2rem;
-  color: var(--text-dark);
-  margin-bottom: 100px;
-  border-radius: 60px 60px 6px 60px;
-  background-color: rgba(127, 236, 255, 0.226);
-  min-width: 300px;
-}
-
-.about-devs {
-  flex: 1 1 40%;
-  padding: 2rem;
-  background: linear-gradient(to right, #6fa8ffb6, #85c9ffb0);
-  color: #ffffff;
-  border-radius: 6px 60px 60px 60px;
-  min-width: 300px;
-  margin-top: 100px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-}
-
-.about-devs h2 {
-  text-align: center;
-  margin-bottom: 1.5rem;
-  font-size: 1.8rem;
-}
-
-.developers-buttons {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  padding: 0 1rem;
-  font-size: 1.1rem;
-}
-
-.developer-button {
-  width: 100%;
-  padding: 1rem;
-  font-size: 1.1rem;
-  background-color: rgba(255, 255, 255, 0.1);
-  border: none;
-  border-radius: 15px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-  color: #fff;
-}
-
-.developer-button:hover {
-  background-color: rgba(255, 255, 255, 0.2);
-  transform: translateY(-3px);
-}
-
-
-
-/* cahtbot at peer support button container */
+/* Chatbot and Peer Support Section */
 .dashboard-chatbot {
   display: flex;
-  flex-direction: column;  
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   margin: 3rem auto;
-  gap: 1rem; 
+  gap: 1rem;
 }
 
-/* chatbot button styling */
+/* Chatbot Button Styling */
 .footer-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9999;
   padding: 1rem 2.5rem;
   font-size: 1.2rem;
   background-color: rgba(95, 141, 241, 0.9);
@@ -127,21 +68,7 @@
   transform: scale(1.05);
 }
 
-/* peer dupport button styling */
-.peer-support-btn {
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.peer-support-btn:hover {
-  background-color: #45a049;
-}
-
-
+/* Modal Styling */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -163,6 +90,7 @@
   max-width: 600px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   color: var(--text-dark);
+  text-align: justify;
 }
 
 .close-modal-btn {
@@ -177,4 +105,65 @@
 
 .close-modal-btn:hover {
   background-color: #ff3333;
+}
+
+/* Dashboard Buttons */
+.dashboard-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  margin: 2rem auto;
+  padding: 1rem;
+}
+
+.dashboard-buttons button {
+  background-color: #3d8285;
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 600;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-buttons button:hover {
+  background-color: #1ca7aa;
+  transform: translateY(-2px);
+  box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.dashboard-buttons button:active {
+  transform: scale(0.98);
+  background-color: #149095;
+}
+
+/* Mobile Responsive Buttons */
+@media screen and (max-width: 480px) {
+  .dashboard-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .dashboard-buttons button {
+    width: 90%;
+    max-width: 300px;
+  }
+}
+
+/* Learn More Section */
+.learn-more-section {
+  margin: 1rem auto;
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 1.5rem;
+  border-radius: 15px;
+  max-width: 800px;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: var(--text-dark);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  text-align: justify;
 }

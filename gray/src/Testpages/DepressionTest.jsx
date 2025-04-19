@@ -111,6 +111,24 @@ const DepressionTest = () => {
           <button onClick={handleSubmit} className="submit-button">
             SUBMIT
           </button>
+          <div className="test-source">
+            <h2>Source:</h2>
+            <p>
+            Developed by Drs. Robert L. Spitzer, Janet B.W. Williams, Kurt Kroenke and colleagues, with an educational grant from
+Pfizer Inc. No permission required to reproduce, translate, display or distribute.
+
+            </p>
+
+            <a
+              href="https://www.apa.org/depression-guideline/patient-health-questionnaire.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              https://www.apa.org/depression-guideline/patient-health-questionnaire.pdf
+            </a>
+
+            <p><strong>Please note:</strong> Online screening tools are not diagnostic instruments. You are encouraged to share your results with a physician or healthcare provider. Mental Health America Inc., sponsors, partners, and advertisers disclaim any liability, loss, or risk incurred as a consequence, directly or indirectly, from the use and application of these screens.</p>
+          </div>
         </div>
       ) : (
         <div className="result-section">
@@ -128,6 +146,9 @@ const DepressionTest = () => {
               </li>
             ))}
           </ul>
+          <p style={{ marginTop: "3rem", textAlign: "justify" }}>
+  <strong>Please note:</strong> Online screening tools are not diagnostic instruments. You are encouraged to share your results with a physician or healthcare provider. Mental Health America Inc., sponsors, partners, and advertisers disclaim any liability, loss, or risk incurred as a consequence, directly or indirectly, from the use and application of these screens.
+</p>
         </div>
       )}
     </div>

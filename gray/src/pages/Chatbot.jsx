@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import '../chatbot/Chatbot.css';
-import Header from "../components/Header";
+
 
 function Chatbot() {
   const [messages, setMessages] = useState([
@@ -102,7 +102,7 @@ function Chatbot() {
 
   return (
     <div className="chat-container">
-      <Header onLoginClick={() => console.log("Login clicked")} />
+      
       
       <div className="chat-box">
         {messages.map((msg, i) => renderMessage(msg, i))}

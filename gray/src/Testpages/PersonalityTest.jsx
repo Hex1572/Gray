@@ -89,12 +89,38 @@ const PersonalityTest = () => {
                   >
                     {option}
                   </button>
+                  
                 ))}
               </div>
+
+              
             </div>
           ))}
 
           <button onClick={handleSubmit} className="submit-button">SUBMIT</button>
+
+          <div className="test-source">
+            <h2>Source:</h2>
+            <p>
+            To permit its use in
+cross-cultural research, the BFI-10 was developed simultaneously in several samples in both English
+and German. Results focus on the psychometric characteristics of the 2-item scales on the BFI-10,
+including their part-whole correlations with the BFI-44 scales, retest reliability, structural validity,
+convergent validity with the NEO-PI-R and its facets, and external validity using peer ratings. Overall, results indicate that the BFI-10 scales retain significant levels of reliability and validity
+
+            </p>
+
+            <a
+              href="https://homepages.se.edu/cvonbergen/files/2013/01/Measuring-Personality-in-One-Minute-or-Less_A-10-Item-Short-Version-of-the-Big-Five-Inventory-in-English-and-German.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              hhttps://homepages.se.edu/cvonbergen/files/2013/01/Measuring-Personality-in-One-Minute-or-Less_A-10-Item-Short-Version-of-the-Big-Five-Inventory-in-English-and-German.pdf
+            </a>
+
+            <p><strong>Please note:</strong> Online screening tools are not diagnostic instruments. You are encouraged to share your results with a physician or healthcare provider. Mental Health America Inc., sponsors, partners, and advertisers disclaim any liability, loss, or risk incurred as a consequence, directly or indirectly, from the use and application of these screens.</p>
+          </div>
+
         </div>
       ) : (
         <div className="result-section">
@@ -117,6 +143,9 @@ const PersonalityTest = () => {
               </li>
             ))}
           </ul>
+          <p style={{ marginTop: "3rem", textAlign: "justify" }}>
+  <strong>Please note:</strong> Online screening tools are not diagnostic instruments. You are encouraged to share your results with a physician or healthcare provider. Mental Health America Inc., sponsors, partners, and advertisers disclaim any liability, loss, or risk incurred as a consequence, directly or indirectly, from the use and application of these screens.
+</p>
         </div>
       )}
     </div>

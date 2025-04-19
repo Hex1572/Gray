@@ -2,10 +2,6 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../testDesign/EatingTest.css";
 
-
-
-
-//mga tanong at choices ni user 
 const questions = [
   {
     id: 1,
@@ -44,9 +40,6 @@ const questions = [
   },
 ];
 
-
-
-//scoring para sa mga choices ni user
 const optionValues = {
   "Not at all": 0,
   "Several days": 1,
@@ -54,39 +47,34 @@ const optionValues = {
   "Nearly every day": 3,
 };
 
-
-
-//eto yung function at computation para sa score ni user
 const logisticRegression = (score) => {
   if (score >= 15) {
     return {
       result: "Severe Anxiety – Consider professional help.",
       description:
-        "Your score suggests that you may be experiencing severe anxiety. It is recommended that you seek professional help, such as a therapist or counselor, who can help you manage and reduce your anxiety. This level of anxiety can significantly impact your daily life, and treatment options such as therapy or medication may be beneficial.",
+        "Your score suggests that you may be experiencing severe anxiety. It is recommended that you seek professional help, such as a therapist or counselor. This level of anxiety can significantly impact your daily life, and treatment options such as therapy or medication may be beneficial.",
     };
   } else if (score >= 10) {
     return {
       result: "Moderate Anxiety – Keep monitoring.",
       description:
-        "Your score suggests moderate anxiety. You may be experiencing stress or anxiety that is affecting your ability to relax or concentrate. It’s important to continue monitoring your mental health and consider self-care strategies such as relaxation exercises, mindfulness, or speaking with a mental health professional if the anxiety persists or worsens.",
+        "Your score suggests moderate anxiety. You may be experiencing stress or anxiety that is affecting your ability to relax or concentrate. It’s important to continue monitoring your mental health and consider self-care strategies or talking to a professional.",
     };
   } else if (score >= 5) {
     return {
       result: "Mild Anxiety – Be mindful of your well-being.",
       description:
-        "Your score suggests mild anxiety. This level of anxiety may be temporary and linked to stress or certain life situations. While it may not be overwhelming, it is important to be mindful of your emotional well-being. Simple lifestyle changes, such as regular exercise, a balanced diet, and relaxation techniques, can help you manage anxiety.",
+        "Your score suggests mild anxiety. This level may be temporary and linked to stress or life events. Keep an eye on your emotional well-being and try practices like mindfulness, exercise, or healthy routines.",
     };
   } else {
     return {
       result: "Minimal Anxiety – Keep taking care of yourself!",
       description:
-        "Your score indicates minimal anxiety, which is a positive result. While everyone experiences stress occasionally, your anxiety levels appear to be manageable. Continue taking care of yourself by maintaining a healthy lifestyle and using stress-relief techniques when needed. Stay mindful of your mental health to prevent it from escalating.",
+        "Your score indicates minimal anxiety, which is great. While stress is normal, your levels seem manageable. Continue your healthy habits and watch for any changes.",
     };
   }
 };
 
-
-// eto yung function na nagrerepresent sa anxiety test
 const AnxietyTest = () => {
   const navigate = useNavigate();
   const [answers, setAnswers] = useState({});
@@ -131,9 +119,7 @@ const AnxietyTest = () => {
                   <button
                     key={option}
                     onClick={() => handleOptionSelect(index, option)}
-                    className={`option-button ${
-                      answers[index] === option ? "selected" : ""
-                    }`}
+                    className={`option-button ${answers[index] === option ? "selected" : ""}`}
                   >
                     {option}
                   </button>
@@ -142,10 +128,35 @@ const AnxietyTest = () => {
             </div>
           ))}
 
+         
           <button onClick={handleSubmit} className="submit-button">
             SUBMIT
           </button>
+
+
+          <div className="test-source">
+            <h2>Source:</h2>
+            <p>
+            Primary Care Evaluation of Mental Disorders Patient Health Questionnaire (PRIME-MD-PHQ). The PHQ was
+developed by Drs. Robert L. Spitzer, Janet B.W. Williams, Kurt Kroenke, and colleagues. For research information, contact Dr.
+Spitzer at ris8@columbia.edu. PRIME-MD® is a trademark of Pfizer Inc. Copyright© 1999 Pfizer Inc. All rights reserved.
+Reproduced with permission
+
+            </p>
+
+            <a
+              href="https://adaa.org/sites/default/files/GAD-7_Anxiety-updated_0.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              https://adaa.org/sites/default/files/GAD-7_Anxiety-updated_0.pdf
+            </a>
+
+            <p><strong>Please note:</strong> Online screening tools are not diagnostic instruments. You are encouraged to share your results with a physician or healthcare provider. Mental Health America Inc., sponsors, partners, and advertisers disclaim any liability, loss, or risk incurred as a consequence, directly or indirectly, from the use and application of these screens.</p>
+          </div>
+
         </div>
+
       ) : (
         <div className="result-section">
           <h2>Your Result:</h2>
@@ -153,15 +164,23 @@ const AnxietyTest = () => {
           <p><strong>{result.result}</strong></p>
           <p>{result.description}</p>
 
+        
+
           <h3>Your Answers:</h3>
           <ul>
             {questions.map((question, index) => (
               <li key={question.id}>
                 <strong>{index + 1}. {question.text}</strong><br />
-                <span style={{ color: "#048bb8" }}>Your answer: {answers[index]}</span>
+                <span style={{ color: "#048bb8" }}>
+                  Your answer: {answers[index]}
+                </span>
               </li>
             ))}
           </ul>
+      
+          <p style={{ marginTop: "3rem", textAlign: "justify" }}>
+  <strong>Please note:</strong> Online screening tools are not diagnostic instruments. You are encouraged to share your results with a physician or healthcare provider. Mental Health America Inc., sponsors, partners, and advertisers disclaim any liability, loss, or risk incurred as a consequence, directly or indirectly, from the use and application of these screens.
+</p>
         </div>
       )}
     </div>
