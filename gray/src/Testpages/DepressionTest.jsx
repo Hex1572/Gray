@@ -115,7 +115,7 @@ const DepressionTest = () => {
             <h2>Source:</h2>
             <p>
             Developed by Drs. Robert L. Spitzer, Janet B.W. Williams, Kurt Kroenke and colleagues, with an educational grant from
-Pfizer Inc. No permission required to reproduce, translate, display or distribute.
+Pfizer Inc.
 
             </p>
 
@@ -127,7 +127,7 @@ Pfizer Inc. No permission required to reproduce, translate, display or distribut
               https://www.apa.org/depression-guideline/patient-health-questionnaire.pdf
             </a>
 
-            <p><strong>Please note:</strong> Online screening tools are not diagnostic instruments. You are encouraged to share your results with a physician or healthcare provider. Mental Health America Inc., sponsors, partners, and advertisers disclaim any liability, loss, or risk incurred as a consequence, directly or indirectly, from the use and application of these screens.</p>
+            <p><strong>Please note:</strong> Online screening tools are not diagnostic instruments. You are encouraged to share your results with a physician or healthcare provider. Mental Health Assessment and the researchers disclaim any liability, loss, or risk incurred as a consequence, directly or indirectly, from the use and application of these screens.</p>
           </div>
         </div>
       ) : (
@@ -147,7 +147,7 @@ Pfizer Inc. No permission required to reproduce, translate, display or distribut
             ))}
           </ul>
           <p style={{ marginTop: "3rem", textAlign: "justify" }}>
-  <strong>Please note:</strong> Online screening tools are not diagnostic instruments. You are encouraged to share your results with a physician or healthcare provider. Mental Health America Inc., sponsors, partners, and advertisers disclaim any liability, loss, or risk incurred as a consequence, directly or indirectly, from the use and application of these screens.
+  <strong>Please note:</strong> Online screening tools are not diagnostic instruments. You are encouraged to share your results with a physician or healthcare provider. Mental Health Assessment and the researchers disclaim any liability, loss, or risk incurred as a consequence, directly or indirectly, from the use and application of these screens.
 </p>
         </div>
       )}
