@@ -3,6 +3,9 @@
   margin-top: 2rem;
   background-color: rgba(127, 236, 255, 0.226);
   padding: 2rem;
+  margin-left: 8rem;
+  margin-right: 8rem;
+  border-radius: 60px;
 }
 
 #title1 {

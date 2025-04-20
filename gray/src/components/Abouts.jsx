@@ -5,7 +5,7 @@ import "../componentDesign/About.css";
 const About = ({ openModal }) => {
   const developers = [
     { name: "Jeffrey Ramirez", bio: "Team Leader" },
-    { name: "Gabriella Enriquez", bio: "System Manager" },
+    { name: "Gabriela Enriquez", bio: "System Manager" },
     { name: "Marc Rainier Buitizon", bio: "Programmer" },
     { name: "Jensha Mica Maniflor", bio: "Programmer" },
   ];
