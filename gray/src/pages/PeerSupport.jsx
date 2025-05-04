@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { pipeline } from '@xenova/transformers';
+import React, { useState } from 'react';
 import './PeerSupport.css';
+import { analyzeSentiment } from '../bertAnalyzer'; // Adjust the import path as necessary
 
 const spaces = [
   'Community Support',
@@ -14,7 +14,6 @@ const spaces = [
 const PeerSupport = ({ initialSpace = 'Community Support' }) => {
   const [activeSpace, setActiveSpace] = useState(initialSpace);
   const [postInput, setPostInput] = useState('');
-
   const [posts, setPosts] = useState(() => {
     const initial = {};
     spaces.forEach((space) => {
@@ -23,57 +22,25 @@ const PeerSupport = ({ initialSpace = 'Community Support' }) => {
     return initial;
   });
 
-  const [nlpModel, setNlpModel] = useState(null);
-  const [loadingModel, setLoadingModel] = useState(true);
-  const [modelError, setModelError] = useState(null);
-
-  useEffect(() => {
-    const loadModel = async () => {
-      try {
-        console.log('Loading BERT zero-shot model...');
-        const model = await pipeline('zero-shot-classification', 'Xenova/facebook-bart-large-mnli', { quantized: true });
-        setNlpModel(model);
-        console.log('BERT model loaded successfully.');
-      } catch (error) {
-        console.error('Failed to load BERT model:', error);
-        setModelError('Failed to load BERT model. Please check console.');
-      } finally {
-        setLoadingModel(false);
-      }
-    };
-    loadModel();
-  }, []);
-
   const handlePost = async () => {
     if (!postInput.trim()) return;
 
-    let assignedSpace = activeSpace;
-
-    if (nlpModel && activeSpace !== 'Suggested Actions') {
-      try {
-        const result = await nlpModel(postInput, spaces.filter(s => s !== 'Suggested Actions'));
-        assignedSpace = result.labels[0];
-        console.log('Classification result:', result);
-        alert(`Your post was categorized under: ${assignedSpace} (score: ${result.scores[0].toFixed(2)})`);
-      } catch (error) {
-        console.error('Error during classification:', error);
-        alert('Error classifying post. Check console.');
-      }
-    }
+    const sentimentResult = await analyzeSentiment(postInput);
 
     const newPost = {
       id: Date.now(),
       text: postInput,
+      sentiment: sentimentResult.label,
+      score: sentimentResult.score,
       comments: [],
     };
 
     setPosts((prev) => ({
       ...prev,
-      [assignedSpace]: [newPost, ...prev[assignedSpace]],
+      [activeSpace]: [newPost, ...prev[activeSpace]],
     }));
 
     setPostInput('');
-    setActiveSpace(assignedSpace); // optional: switch view to the assigned space
   };
 
   const renderMainContent = () => {
@@ -113,7 +80,6 @@ const PeerSupport = ({ initialSpace = 'Community Support' }) => {
               space={activeSpace}
               posts={posts}
               setPosts={setPosts}
-              nlpModel={nlpModel}
             />
           ))}
         </div>
@@ -130,14 +96,6 @@ const PeerSupport = ({ initialSpace = 'Community Support' }) => {
       </>
     );
   };
-
-  if (loadingModel) {
-    return <div>Loading BERT model, please wait...</div>;
-  }
-
-  if (modelError) {
-    return <div style={{ color: 'red' }}>{modelError}</div>;
-  }
 
   return (
     <div className="peer-layout">
@@ -177,29 +135,17 @@ const PeerSupport = ({ initialSpace = 'Community Support' }) => {
   );
 };
 
-const PostCard = ({ post, space, posts, setPosts, nlpModel }) => {
+const PostCard = ({ post, space, posts, setPosts }) => {
   const [comment, setComment] = useState('');
 
-  const addComment = async () => {
+  const addComment = () => {
     if (!comment.trim()) return;
 
-    if (nlpModel) {
-      try {
-        const result = await nlpModel(comment, [
-          'Mental Health',
-          'Motivation',
-          'Community Support',
-          'Life Advice',
-          '1-on-1 Support',
-        ]);
-        console.log('Comment classification result:', result);
-      } catch (error) {
-        console.error('Error classifying comment:', error);
-      }
-    }
-
     const updatedPosts = posts[space].map((p) =>
-      p.id === post.id ? { ...p, comments: [...p.comments, { id: Date.now(), text: comment }] } : p
+      p.id === post.id ? {
+        ...p,
+        comments: [...p.comments, { id: Date.now(), text: comment }]
+      } : p
     );
 
     setPosts({ ...posts, [space]: updatedPosts });
@@ -209,6 +155,11 @@ const PostCard = ({ post, space, posts, setPosts, nlpModel }) => {
   return (
     <div className="post-card">
       <p className="post-text">🧑‍ Anonymous: {post.text}</p>
+      {post.sentiment && (
+        <p className="sentiment-tag">
+          🧠 Sentiment: <strong>{post.sentiment}</strong> ({(post.score * 100).toFixed(1)}%)
+        </p>
+      )}
       <div className="comment-area">
         <input
           type="text"
