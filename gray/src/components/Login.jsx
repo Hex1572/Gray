@@ -124,7 +124,7 @@ const Login = ({ onClose }) => {
               onChange={handleRegisterChange}
               required
             />
-            <button type="submit">Sign Up</button>
+            <button type="submit">Sign Up </button>
           </form>
         )}
       </div>

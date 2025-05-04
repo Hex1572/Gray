@@ -217,3 +217,29 @@
 .close-modal-btn:hover {
   background-color: #c53030;
 }
+.sentiment {
+  margin-left: 10px;
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+.model-status {
+  font-size: 0.9rem;
+  color: #888;
+  margin-top: 5px;
+}
+
+.sentiment.positive {
+  color: green;
+  font-weight: bold;
+}
+
+.sentiment.negative {
+  color: red;
+  font-weight: bold;
+}
+
+.sentiment.neutral {
+  color: gray;
+  font-weight: bold;
+}

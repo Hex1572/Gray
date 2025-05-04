@@ -1,46 +1,83 @@
-import React, { useState, useEffect } from "react";
-import "./PeerSupport.css";
+import React, { useState, useEffect } from 'react';
+import { pipeline } from '@xenova/transformers';
+import './PeerSupport.css';
 
 const spaces = [
-  "Community Support",
-  "Suggested Actions",
-  "1-on-1 Support",
-  "Mental Health",
-  "Motivation",
-  "Life Advice",
+  'Community Support',
+  'Suggested Actions',
+  '1-on-1 Support',
+  'Mental Health',
+  'Motivation',
+  'Life Advice',
 ];
 
-const PeerSupport = ({ initialSpace = "Community Support" }) => {
+const PeerSupport = ({ initialSpace = 'Community Support' }) => {
   const [activeSpace, setActiveSpace] = useState(initialSpace);
-  const [postInput, setPostInput] = useState("");
-  const [posts, setPosts] = useState({
-    "Community Support": [],
-    "1-on-1 Support": [],
-    "Mental Health": [],
-    "Motivation": [],
-    "Life Advice": [],
+  const [postInput, setPostInput] = useState('');
+
+  const [posts, setPosts] = useState(() => {
+    const initial = {};
+    spaces.forEach((space) => {
+      initial[space] = [];
+    });
+    return initial;
   });
 
-  useEffect(() => {
-    setActiveSpace(initialSpace);
-  }, [initialSpace]);
+  const [nlpModel, setNlpModel] = useState(null);
+  const [loadingModel, setLoadingModel] = useState(true);
+  const [modelError, setModelError] = useState(null);
 
-  const handlePost = () => {
+  useEffect(() => {
+    const loadModel = async () => {
+      try {
+        console.log('Loading BERT zero-shot model...');
+        const model = await pipeline('zero-shot-classification', 'Xenova/facebook-bart-large-mnli', { quantized: true });
+        setNlpModel(model);
+        console.log('BERT model loaded successfully.');
+      } catch (error) {
+        console.error('Failed to load BERT model:', error);
+        setModelError('Failed to load BERT model. Please check console.');
+      } finally {
+        setLoadingModel(false);
+      }
+    };
+    loadModel();
+  }, []);
+
+  const handlePost = async () => {
     if (!postInput.trim()) return;
+
+    let assignedSpace = activeSpace;
+
+    if (nlpModel && activeSpace !== 'Suggested Actions') {
+      try {
+        const result = await nlpModel(postInput, spaces.filter(s => s !== 'Suggested Actions'));
+        assignedSpace = result.labels[0];
+        console.log('Classification result:', result);
+        alert(`Your post was categorized under: ${assignedSpace} (score: ${result.scores[0].toFixed(2)})`);
+      } catch (error) {
+        console.error('Error during classification:', error);
+        alert('Error classifying post. Check console.');
+      }
+    }
+
     const newPost = {
       id: Date.now(),
       text: postInput,
       comments: [],
     };
+
     setPosts((prev) => ({
       ...prev,
-      [activeSpace]: [newPost, ...prev[activeSpace]],
+      [assignedSpace]: [newPost, ...prev[assignedSpace]],
     }));
-    setPostInput("");
+
+    setPostInput('');
+    setActiveSpace(assignedSpace); // optional: switch view to the assigned space
   };
 
   const renderMainContent = () => {
-    if (activeSpace === "Suggested Actions") {
+    if (activeSpace === 'Suggested Actions') {
       return (
         <div className="resource-links">
           <h3>Suggested Actions</h3>
@@ -76,6 +113,7 @@ const PeerSupport = ({ initialSpace = "Community Support" }) => {
               space={activeSpace}
               posts={posts}
               setPosts={setPosts}
+              nlpModel={nlpModel}
             />
           ))}
         </div>
@@ -93,6 +131,14 @@ const PeerSupport = ({ initialSpace = "Community Support" }) => {
     );
   };
 
+  if (loadingModel) {
+    return <div>Loading BERT model, please wait...</div>;
+  }
+
+  if (modelError) {
+    return <div style={{ color: 'red' }}>{modelError}</div>;
+  }
+
   return (
     <div className="peer-layout">
       <aside className="left-sidebar">
@@ -101,7 +147,7 @@ const PeerSupport = ({ initialSpace = "Community Support" }) => {
           {spaces.map((space) => (
             <li
               key={space}
-              className={space === activeSpace ? "active" : ""}
+              className={space === activeSpace ? 'active' : ''}
               onClick={() => setActiveSpace(space)}
             >
               {space}
@@ -131,16 +177,33 @@ const PeerSupport = ({ initialSpace = "Community Support" }) => {
   );
 };
 
-const PostCard = ({ post, space, posts, setPosts }) => {
-  const [comment, setComment] = useState("");
+const PostCard = ({ post, space, posts, setPosts, nlpModel }) => {
+  const [comment, setComment] = useState('');
 
-  const addComment = () => {
+  const addComment = async () => {
     if (!comment.trim()) return;
+
+    if (nlpModel) {
+      try {
+        const result = await nlpModel(comment, [
+          'Mental Health',
+          'Motivation',
+          'Community Support',
+          'Life Advice',
+          '1-on-1 Support',
+        ]);
+        console.log('Comment classification result:', result);
+      } catch (error) {
+        console.error('Error classifying comment:', error);
+      }
+    }
+
     const updatedPosts = posts[space].map((p) =>
       p.id === post.id ? { ...p, comments: [...p.comments, { id: Date.now(), text: comment }] } : p
     );
+
     setPosts({ ...posts, [space]: updatedPosts });
-    setComment("");
+    setComment('');
   };
 
   return (
