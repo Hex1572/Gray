@@ -243,3 +243,53 @@
   color: gray;
   font-weight: bold;
 }
+
+/* Add this to style the poster's name */
+.poster-name {
+  font-weight: bold;
+  color: #4CAF50; /* You can choose a color that fits your design */
+  margin-right: 5px;
+}
+
+.post-text {
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.comment-area {
+  margin-top: 10px;
+}
+
+.comment-text {
+  font-size: 12px;
+  margin-top: 5px;
+  color: #555;
+}
+
+.emotion-tag {
+  font-style: italic;
+  color: #777;
+}
+
+.resource-links {
+  padding: 10px;
+}
+
+.note {
+  margin-top: 10px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #444;
+}
+.delete-comment {
+  background-color: #f44336; /* Red for delete */
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.delete-comment:hover {
+  background-color: #d32f2f;
+}

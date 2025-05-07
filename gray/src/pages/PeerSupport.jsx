@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { auth } from '../firebase/firebase'; // Import the auth object from your firebase.js file
+import { onAuthStateChanged, signInWithEmailAndPassword } from 'firebase/auth';
 import './PeerSupport.css';
-import { analyzeSentiment } from '../bertAnalyzer'; // Adjust the import path as necessary
 
-const spaces = [
+const userSpaces = [
   'Community Support',
   'Suggested Actions',
   '1-on-1 Support',
@@ -11,36 +12,91 @@ const spaces = [
   'Life Advice',
 ];
 
+const adminSpaces = [
+  'Admin Dashboard',
+  'User Reports',
+  'System Notifications',
+  'Admin Actions',
+];
+
 const PeerSupport = ({ initialSpace = 'Community Support' }) => {
   const [activeSpace, setActiveSpace] = useState(initialSpace);
   const [postInput, setPostInput] = useState('');
   const [posts, setPosts] = useState(() => {
     const initial = {};
-    spaces.forEach((space) => {
+    [...userSpaces, ...adminSpaces].forEach((space) => {
       initial[space] = [];
     });
     return initial;
   });
 
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [email, setEmail] = useState(''); // Store email for login
+
+  useEffect(() => {
+    // Track auth state changes (user login or logout)
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // Check if the user is an admin based on their email
+        setIsAdmin(user.email === 'admin@gmail.com');
+      }
+      setLoading(false);
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      await signInWithEmailAndPassword(auth, email, 'yourPassword'); // Replace 'yourPassword' with the actual password
+    } catch (error) {
+      console.error('Login failed: ', error);
+      alert('Failed to log in. Please try again.');
+    }
+  };
+
+  if (loading) return <div>Loading...</div>;
+
+  const spaces = isAdmin ? adminSpaces : userSpaces;
+
   const handlePost = async () => {
     if (!postInput.trim()) return;
 
-    const sentimentResult = await analyzeSentiment(postInput);
+    const user = auth.currentUser;
+    const userName = isAdmin && user ? user.email : 'Anonymous'; // Only show email if admin is logged in
 
-    const newPost = {
-      id: Date.now(),
-      text: postInput,
-      sentiment: sentimentResult.label,
-      score: sentimentResult.score,
-      comments: [],
-    };
+    try {
+      const response = await fetch('http://localhost:5000/analyze', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ text: postInput }),
+      });
 
-    setPosts((prev) => ({
-      ...prev,
-      [activeSpace]: [newPost, ...prev[activeSpace]],
-    }));
+      const analysis = await response.json();
+      const emotion = analysis[0]?.label || 'Neutral';
 
-    setPostInput('');
+      const newPost = {
+        id: Date.now(),
+        text: postInput,
+        emotion,
+        userName, // Store the poster's name/email (or 'Anonymous' for regular users)
+        comments: [],
+      };
+
+      setPosts((prev) => ({
+        ...prev,
+        [activeSpace]: [newPost, ...prev[activeSpace]],
+      }));
+
+      setPostInput('');
+    } catch (error) {
+      console.error('Failed to analyze post:', error);
+      alert('There was a problem analyzing your post. Please try again.');
+    }
   };
 
   const renderMainContent = () => {
@@ -80,6 +136,7 @@ const PeerSupport = ({ initialSpace = 'Community Support' }) => {
               space={activeSpace}
               posts={posts}
               setPosts={setPosts}
+              isAdmin={isAdmin} // Pass isAdmin flag to PostCard
             />
           ))}
         </div>
@@ -135,31 +192,41 @@ const PeerSupport = ({ initialSpace = 'Community Support' }) => {
   );
 };
 
-const PostCard = ({ post, space, posts, setPosts }) => {
+const PostCard = ({ post, space, posts, setPosts, isAdmin }) => {
   const [comment, setComment] = useState('');
 
   const addComment = () => {
     if (!comment.trim()) return;
 
     const updatedPosts = posts[space].map((p) =>
-      p.id === post.id ? {
-        ...p,
-        comments: [...p.comments, { id: Date.now(), text: comment }]
-      } : p
+      p.id === post.id
+        ? { ...p, comments: [...p.comments, { id: Date.now(), text: comment }] }
+        : p
     );
 
     setPosts({ ...posts, [space]: updatedPosts });
     setComment('');
   };
 
+  const deleteComment = (commentId) => {
+    const updatedPosts = posts[space].map((p) =>
+      p.id === post.id
+        ? { ...p, comments: p.comments.filter((c) => c.id !== commentId) }
+        : p
+    );
+
+    setPosts({ ...posts, [space]: updatedPosts });
+  };
+
   return (
     <div className="post-card">
-      <p className="post-text">🧑‍ Anonymous: {post.text}</p>
-      {post.sentiment && (
-        <p className="sentiment-tag">
-          🧠 Sentiment: <strong>{post.sentiment}</strong> ({(post.score * 100).toFixed(1)}%)
-        </p>
-      )}
+      <p className="post-text">
+        {isAdmin && post.userName && (
+          <span className="poster-name">{post.userName}</span> // Show the poster's name if admin is logged in
+        )}
+        {isAdmin ? post.userName : 'Anonymous'}: {post.text}
+        <span className="emotion-tag"> ({post.emotion})</span>
+      </p>
       <div className="comment-area">
         <input
           type="text"
@@ -171,7 +238,14 @@ const PostCard = ({ post, space, posts, setPosts }) => {
       </div>
       <div className="comments">
         {post.comments.map((c) => (
-          <p key={c.id} className="comment-text">💬 {c.text}</p>
+          <div key={c.id} className="comment">
+            <p className="comment-text">💬 {c.text}</p>
+            {isAdmin && (
+              <button className="delete-comment" onClick={() => deleteComment(c.id)}>
+                Delete
+              </button>
+            )}
+          </div>
         ))}
       </div>
     </div>

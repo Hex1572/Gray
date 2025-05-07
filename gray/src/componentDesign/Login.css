@@ -107,3 +107,49 @@
     cursor: pointer;
     color: #333;
   }
+
+  @media (max-width: 600px) {
+    .modal-content.modal-fullscreen {
+      width: 90%;
+    }
+  
+    .modal-title {
+      font-size: 1.5rem;
+    }
+  
+    .login-form input {
+      font-size: 0.9rem;
+    }
+  
+    .login-form button {
+      font-size: 0.9rem;
+    }
+  }
+
+  .google-sign-in {
+    background-color: #db4437;
+    color: white;
+    font-weight: bold;
+    margin-top: 10px;
+    transition: background 0.3s ease;
+  }
+  
+  .google-sign-in:hover {
+    background-color: #c1351d;
+  }
+  
+  .login-form input, .login-form button {
+    font-size: 1rem; /* Make sure text remains readable on mobile */
+  }
+  
+  .forgot-password {
+    cursor: pointer;
+    color: #007bff;
+    margin-top: 10px;
+    text-align: center;
+  }
+  .forgot-password:hover {
+    text-decoration: underline;
+  }
+  
+  

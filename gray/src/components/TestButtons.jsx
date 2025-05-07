@@ -1,24 +1,56 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "../componentDesign/TestButtons.css";
+import { auth } from "../firebase/firebase";
+import { onAuthStateChanged } from "firebase/auth";
 
 const TestButtons = () => {
+  const [user, setUser] = useState(null);
+  const [showLoginPrompt, setShowLoginPrompt] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+    });
+    return () => unsubscribe();
+  }, []);
+
+  const handleTestClick = (path) => {
+    if (user) {
+      navigate(path);
+    } else {
+      setShowLoginPrompt(true);
+    }
+  };
+
   return (
     <div className="test-buttons">
-
       <div className="test-buttons-title">
         <h2>Take a Mental Health Test</h2>
       </div>
 
       <div className="test-button-group">
-        <Link to="/anxiety" className="test-button">Anxiety Test</Link>
-        <Link to="/depression" className="test-button">Depression Test</Link>
-        <Link to="/well-being" className="test-button">Well-Being Test</Link>
-        <Link to="/eating-disorder" className="test-button">Personality Test</Link>
+        <button onClick={() => handleTestClick("/anxiety")}>Anxiety Test</button>
+        <button onClick={() => handleTestClick("/depression")}>Depression Test</button>
+        <button onClick={() => handleTestClick("/well-being")}>Well-Being Test</button>
+        <button onClick={() => handleTestClick("/eating-disorder")}>Personality Test</button>
       </div>
 
-
-      
+      {showLoginPrompt && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <h3>Login Required</h3>
+            <p>You need to log in before accessing the tests.</p>
+            <button
+              className="close-modal-btn"
+              onClick={() => setShowLoginPrompt(false)}
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

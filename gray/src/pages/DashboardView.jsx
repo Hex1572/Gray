@@ -13,6 +13,7 @@ const DashboardView = () => {
   const [showPeerSupport, setShowPeerSupport] = useState(false);
   const [selectedSpace, setSelectedSpace] = useState("Community Support");
   const chatbotButtonRef = useRef(null);
+  const testButtonsRef = useRef(null); // NEW: ref for TestButtons
 
   const supportCards = [
     { title: "Things to Try on Your Own", space: "Suggested Actions" },
@@ -33,6 +34,10 @@ const DashboardView = () => {
 
   const toggleChatbot = () => {
     setIsChatbotVisible((prev) => !prev);
+  };
+
+  const scrollToTestButtons = () => {
+    testButtonsRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
   useEffect(() => {
@@ -91,7 +96,7 @@ const DashboardView = () => {
         </div>
 
         <div className="dashboard-buttons">
-          <button>TAKE A MENTAL HEALTH TEST</button>
+          <button onClick={scrollToTestButtons}>TAKE A MENTAL HEALTH TEST</button>
           <button onClick={() => setShowLearnMore((prev) => !prev)}>
             {showLearnMore ? "HIDE DETAILS" : "LEARN MORE ABOUT MENTAL HEALTH"}
           </button>
@@ -116,7 +121,8 @@ const DashboardView = () => {
         )}
       </div>
 
-      <div className="dashboard-buttons">
+      {/* Ref added here */}
+      <div className="dashboard-buttons" ref={testButtonsRef}>
         <TestButtons />
       </div>
 
